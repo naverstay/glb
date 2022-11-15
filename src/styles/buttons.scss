@@ -1,0 +1,139 @@
+.btn {
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+
+  &-blue {
+    background: $btn-blue-bg;
+    transition: background .3s, color .3s;
+    color: $btn-blue-text;
+
+    &:hover {
+      background: $text-blue-color;
+    }
+  }
+
+  &-darkblue {
+    background: $text-blue-color;
+    transition: background .3s, color .3s;
+    color: $text-white-color;
+
+    &:hover {
+      background: $btn-blue-text;
+    }
+  }
+
+  &-red__border {
+    background: $btn-gray-bg-light;
+    transition: background .3s, color .3s;
+    color: $text-rose-color;
+    box-shadow: inset 0 0 0 1px $text-rose-color;
+
+    &:hover {
+      background: $text-rose-color;
+      color: $text-white-color;
+    }
+  }
+
+  &[disabled] {
+    pointer-events: none;
+    opacity: .5;
+  }
+
+}
+
+.toggle {
+
+  &-holder {
+    display: inline-block;
+  }
+
+  &-wrapper {
+    display: grid;
+    column-gap: 8px;
+    grid-template-areas: "toggle top" "toggle bottom";
+
+    &__text {
+      text-align: left;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    &__top {
+      grid-area: top;
+    }
+
+    &__bottom {
+      grid-area: bottom;
+    }
+  }
+
+  &-text {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: $btn-blue-bg;
+    padding: 0 3px;
+  }
+
+  &-label {
+    grid-area: toggle;
+    cursor: pointer;
+    background: $btn-gray-bg-dark;
+    position: relative;
+    height: 26px;
+    border-radius: 13px;
+    min-width: 48px;
+    display: flex;
+    align-items: center;
+    transition: padding .3s;
+    padding-left: 24px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 100%;
+      margin: -10px 3px 0;
+      background: $text-white-color;
+      transition: left .3s;
+    }
+
+    input {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    &:not(.__checked) {
+      ~ .toggle-wrapper__top {
+        font-weight: 700;
+      }
+    }
+
+    &.__checked {
+      padding: 0 24px 0 0;
+      background: $btn-green-bg;
+
+      &::before {
+        left: calc(100% - 26px);
+      }
+
+      ~ .toggle-wrapper__bottom {
+        font-weight: 700;
+      }
+    }
+
+    &.toggle-blue {
+      background: $text-blue-color;
+
+      &.__checked {
+        background: $text-blue-color;
+      }
+    }
+  }
+}

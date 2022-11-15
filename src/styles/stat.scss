@@ -1,0 +1,45 @@
+.stat {
+
+  &-controls {
+    padding-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    .btn {
+      border-radius: 4px;
+      min-width: 102px;
+      padding: 13px 20px;
+      font-size: 16px;
+    }
+  }
+
+  &-holder {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+    gap: 6px;
+    padding: 20px 10px 14px;
+    border-radius: 7px;
+    background: $text-white-color-dark;
+
+    &__val {
+      text-align: center;
+      font-weight: 700;
+      font-size: 48px;
+    }
+
+    &__name {
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+  }
+}

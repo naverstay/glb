@@ -1,0 +1,99 @@
+.suggestion {
+
+  &-control {
+    padding: 0 0 20px;
+    text-align: center;
+
+    .btn {
+      display: inline-block;
+      vertical-align: top;
+      border-radius: 4px;
+      padding: 14px 16px;
+    }
+  }
+
+  &-list {
+    padding: 16px 0 20px;
+
+    &__row {
+      margin-bottom: 3px;
+      display: grid;
+      gap: 3px;
+      grid-template-columns: 1fr 120px 52px;
+
+      > div {
+        background: $text-blue-color-light;
+        padding: 13px 10px;
+        display: flex;
+        align-items: flex-start;
+        white-space: nowrap;
+
+        &:first-child {
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+
+          ~ div {
+            justify-content: center;
+          }
+
+        }
+
+        &:last-child {
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+        }
+      }
+
+      &.__bingo {
+        > div {
+          background: $text-green-light-color;
+        }
+      }
+    }
+
+    &__flag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+
+      img {
+        display: block;
+        max-width: 22px;
+      }
+    }
+
+    &__name {
+      position: relative;
+      padding-left: 40px !important;
+    }
+  }
+
+  &-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 40px 0 0;
+
+    .btn {
+      border-radius: 4px;
+      padding: 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+
+      &.__active {
+        pointer-events: none;
+      }
+
+      &:not(.__active) {
+        color: $text-main-color;
+        background: transparent;
+
+        &:hover {
+          background: $text-blue-color-light;
+        }
+      }
+    }
+  }
+
+}
