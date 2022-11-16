@@ -155,15 +155,10 @@ export default function Guesser({
             const answerCountry = JSON.parse(
                 localStorage.getItem("practice") as string
             );
+
             if (guessCountry && answerCountry) {
-                guessCountry["proximity"] = polygonDistance(
-                    guessCountry,
-                    answerCountry
-                );
-                guessCountry["direction"] = polygonDirection(
-                    guessCountry,
-                    answerCountry
-                );
+                guessCountry["proximity"] = polygonDistance(guessCountry, answerCountry);
+                guessCountry["direction"] = polygonDirection(guessCountry, answerCountry);
                 setGuesses([guessCountry, ...guesses]);
                 setGuessName("");
                 return;

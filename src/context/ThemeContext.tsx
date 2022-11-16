@@ -23,7 +23,6 @@ type ThemeContextType = {
 const initialTheme: Theme = {
   nightMode: false,
   highContrast: false,
-  prideMode: false,
   milesMode: false,
 };
 

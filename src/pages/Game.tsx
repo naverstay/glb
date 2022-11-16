@@ -33,6 +33,11 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
         countries: [],
     });
 
+    const [practiceStoredGuesses, practiceStoreGuesses] = useLocalStorage<Guesses>("practiceGuesses", {
+        day: '',
+        countries: [],
+    });
+
     const firstStats = {
         gamesPlayed: 0,
         gamesWon: 0,
@@ -42,28 +47,34 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
         usedGuesses: [],
         emojiGuesses: "",
     };
-    const [storedStats, storeStats] = useLocalStorage<Stats>(
-        "statistics",
-        firstStats
-    );
+
+    const [storedStats, storeStats] = useLocalStorage<Stats>("statistics", firstStats);
 
     // Set up practice mode
     // const navigate = useNavigate();
 
     function enterPracticeMode() {
-        const practiceAnswer =
-            countryData[Math.floor(Math.random() * countryData.length)];
+        console.log('enterPracticeMode', practiceStoredGuesses);
 
-        console.log('enterPracticeMode', practiceAnswer);
+        if (practiceStoredGuesses?.day === '' && practiceStoredGuesses?.countries?.length) {
+            const loadCountries: Country[] = countryData.filter(m => practiceStoredGuesses.countries.indexOf(m.properties.NAME) > -1)
 
-        localStorage.setItem("practice", JSON.stringify(practiceAnswer));
-        // navigate("/game?practice_mode=true");
-        setGuesses([]);
-        setWin(false);
+            setGuesses(loadCountries);
+            setWin(false);
+        } else {
+            const practiceAnswer =
+                countryData[Math.floor(Math.random() * countryData.length)];
+
+            localStorage.setItem("practice", JSON.stringify(practiceAnswer));
+            // navigate("/game?practice_mode=true");
+            setGuesses([]);
+            setWin(false);
+        }
     }
 
     // goto practiceMode
     useEffect(() => {
+        console.log('enterPracticeMode', practiceMode);
         if (practiceMode) {
             enterPracticeMode();
             navigate("/?practice_mode=true")
@@ -71,51 +82,67 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
             navigate("/")
         }
 
-        if (reSpin) setTimeout(() => setReSpin(false), 1);
+        if (reSpin) setTimeout(() => {
+            setReSpin(false);
+        }, 1);
+        // eslint-disable-next-line
     }, [practiceMode, navigate, reSpin, setReSpin]);
 
     const storedCountries = useMemo(() => {
-        if (today <= storedGuesses.day && !practiceMode) {
-            const names = storedGuesses.countries;
-            return names.map((guess) => {
-                const foundCountry = countryData.find((country) => {
-                    return country.properties.NAME === guess;
-                });
-                if (!foundCountry) {
-                    throw new Error("Country mapping broken");
-                }
-                foundCountry["proximity"] = polygonDistance(
-                    foundCountry,
-                    answerCountry
-                );
-                foundCountry["direction"] = polygonDirection(
-                    foundCountry,
-                    answerCountry
-                );
-                return foundCountry;
+        const list = today <= storedGuesses.day && !practiceMode ? storedGuesses : practiceStoredGuesses;
+
+        const names = list.countries;
+        return names.map((guess) => {
+            const foundCountry = countryData.find((country) => {
+                return country.properties.NAME === guess;
             });
-        }
-        return [];
+            if (!foundCountry) {
+                throw new Error("Country mapping broken");
+            }
+            foundCountry["proximity"] = polygonDistance(foundCountry, answerCountry);
+            foundCountry["direction"] = polygonDirection(foundCountry, answerCountry);
+            return foundCountry;
+        });
+
         // eslint-disable-next-line
     }, [practiceMode]);
 
     // Check if win condition already met
-    const alreadyWon = practiceMode
-        ? false
-        : storedCountries?.map((c) => c.properties.NAME).includes(answerName);
+    const alreadyWon = useMemo(() => {
+        return practiceMode
+            ? practiceStoredGuesses.day === 'win'
+            : storedCountries?.map((c) => c.properties.NAME).includes(answerName)
+    }, [practiceMode, practiceStoredGuesses, storedCountries]);
 
     // Now we're ready to start the game! Set up the game states with the data we
     // already know from the stored info.
-    const [guesses, setGuesses] = useState<Country[]>(
-        practiceMode ? [] : storedCountries
-    );
+    const [guesses, setGuesses] = useState<Country[]>(storedCountries);
     const [win, setWin] = useState(alreadyWon);
     const globeRef = useRef<GlobeMethods>(null!);
 
     // Whenever there's a new guess
     useEffect(() => {
         if (!practiceMode) {
+            setGuesses(alreadyWon ? [] : storedCountries);
+        }
+    }, [practiceMode, setGuesses, storedCountries, alreadyWon]);
+
+    // Whenever there's a new guess
+    useEffect(() => {
+        if (practiceMode) {
             const guessNames = guesses.map((country) => country.properties.NAME);
+
+            practiceStoreGuesses({
+                day: '',
+                countries: guessNames,
+            });
+        }
+    }, [guesses, practiceStoreGuesses, practiceMode]);
+
+    useEffect(() => {
+        if (!practiceMode) {
+            const guessNames = guesses.map((country) => country.properties.NAME);
+
             storeGuesses({
                 day: today,
                 countries: guessNames,
@@ -161,8 +188,16 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
 
             // Show stats
             setTimeout(() => setShowStats(''), 3000);
+        } else if (practiceMode) {
+            const guessNames = guesses.map((country) => country.properties.NAME);
+
+            practiceStoreGuesses({
+                day: win ? 'win' : '',
+                countries: guessNames,
+            });
         }
-    }, [win, guesses, setShowStats, storeStats, storedStats, practiceMode]);
+
+    }, [win, guesses, setShowStats, storeStats, storedStats, practiceMode, practiceStoreGuesses]);
 
     // Practice mode
 
