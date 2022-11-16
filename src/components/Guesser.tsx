@@ -4,13 +4,11 @@ import {answerCountry, answerName} from "../util/answer";
 import {Message} from "./Message";
 import {polygonDirection, polygonDistance} from "../util/distance";
 import {ReactSearchAutocomplete} from 'react-search-autocomplete';
-// import alternateNames from "../data/alternate_names.json";
 import {LocaleContext} from "../i18n/LocaleContext";
 import localeList from "../i18n/messages";
 import {FormattedMessage} from "react-intl";
 import {langNameMap} from "../i18n/locales";
 import {AltNames} from "../lib/alternateNames";
-import {fireEvent} from "@testing-library/react";
 
 const countryData: Country[] = require("../data/country_data.json").features;
 const alternateNames: AltNames = require("../data/alternate_names.json");
