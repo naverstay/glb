@@ -1,8 +1,5 @@
-import {useContext} from "react";
 import {useNavigate} from "react-router-dom";
-import {ThemeContext} from "../context/ThemeContext";
 import {getPath} from "../util/svg";
-import Toggle from "./Toggle";
 
 type Props = {
     practiceMode: boolean;
@@ -12,7 +9,6 @@ type Props = {
 };
 
 export default function Header({setReSpin, setShowPopup, practiceMode, setPracticeMode}: Props) {
-    const {theme} = useContext(ThemeContext);
     const navigate = useNavigate();
 
     // Set up practice mode
@@ -24,8 +20,6 @@ export default function Header({setReSpin, setShowPopup, practiceMode, setPracti
         }
         navigate("/game");
     }
-
-    const svgColour = theme.nightMode ? "rgb(209 213 219)" : "black";
 
     console.log('###RENDER### header');
 
