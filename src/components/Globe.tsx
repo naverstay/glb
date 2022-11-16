@@ -54,10 +54,11 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
         setPlaces(guesses.concat(territories));
 
         // Turn globe to new spot
-        const newGuess = [...guesses].pop();
+        const newGuess = guesses[0];
         if (newGuess) {
             const controls: any = globeRef.current.controls();
             controls.autoRotate = false;
+            console.log('Globe', newGuess);
             const newSpot = findCentre(newGuess);
             turnGlobe(newSpot, globeRef, "zoom");
         }
@@ -102,8 +103,8 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
     function getLabel(country: Country) {
         const name = country.properties.ADMIN;
         const prox = country.proximity;
-        const dayColour = prox < 750_000 ? "gray-300" : "gray-900";
-        const nightColour = "gray-300";
+        const dayColour = prox < 750_000 ? "text-gray" : "text-gray-dark";
+        const nightColour = "text-gray";
         return `<b class="text-${dayColour} dark:text-${nightColour}">${name}</b>`;
     }
 
@@ -113,8 +114,7 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
         const prox = country.proximity;
         let proxFraction = prox / 2_000_000;
         proxFraction = Math.min(Math.max(proxFraction, 0.01), 0.95);
-        let alt = (1 - proxFraction) / 10;
-        return alt;
+        return (1 - proxFraction) / 10;
     }
 
     // Clicking the zoom buttons on mobile

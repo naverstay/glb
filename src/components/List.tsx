@@ -24,13 +24,16 @@ function reorderGuesses(guessList: Country[], practiceMode: boolean) {
             const answerCountry = JSON.parse(
                 localStorage.getItem("practice") as string
             ) as Country;
-            const answerName = answerCountry.properties.NAME;
-            if (a.properties.NAME === answerName) {
-                return -1;
-            } else if (b.properties.NAME === answerName) {
-                return 1;
-            } else {
-                return a.proximity - b.proximity;
+
+            if (answerCountry) {
+                const answerName = answerCountry.properties.NAME;
+                if (a.properties.NAME === answerName) {
+                    return -1;
+                } else if (b.properties.NAME === answerName) {
+                    return 1;
+                } else {
+                    return a.proximity - b.proximity;
+                }
             }
         }
 

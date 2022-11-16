@@ -177,7 +177,7 @@ export default function Guesser({
         if (guessCountry && answerCountry) {
             guessCountry["proximity"] = polygonDistance(guessCountry, answerCountry);
             guessCountry["direction"] = polygonDirection(guessCountry, answerCountry);
-            setGuesses([...guesses, guessCountry]);
+            setGuesses([guessCountry, ...guesses]);
             setGuessName("");
         }
     }
