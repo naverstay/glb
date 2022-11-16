@@ -16,11 +16,9 @@ type Props = {
 
 export default function Settings({closeCallback, setMiles, miles, setPracticeMode, practiceMode}: Props) {
     const themeContext = useContext(ThemeContext);
-    const [toggleTheme, setToggleTheme] = useState(!themeContext.theme.nightMode);
+    const [toggleTheme, setToggleTheme] = useState(themeContext.theme.nightMode);
     // const [togglePride, setTogglePride] = useState(!themeContext.theme.prideMode);
-    const [toggleHighContrast, setToggleHighContrast] = useState(
-        !themeContext.theme.highContrast
-    );
+    const [toggleHighContrast, setToggleHighContrast] = useState(themeContext.theme.highContrast);
     const {locale} = useContext(LocaleContext);
 
     // const [toggleScope, setToggleScope] = useState(true);
@@ -30,12 +28,12 @@ export default function Settings({closeCallback, setMiles, miles, setPracticeMod
     useEffect(() => {
         if (setTheme) {
             setTheme({
-                nightMode: !toggleTheme,
-                highContrast: !toggleHighContrast,
-                // prideMode: !togglePride,
+                nightMode: toggleTheme,
+                highContrast: toggleHighContrast,
+                milesMode: miles,
             });
         }
-    }, [toggleTheme, toggleHighContrast, setTheme
+    }, [toggleTheme, toggleHighContrast, setTheme, miles
         // , togglePride
     ]);
 

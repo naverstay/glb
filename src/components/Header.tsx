@@ -16,9 +16,9 @@ export default function Header({setReSpin, setShowPopup, practiceMode, setPracti
     function reRenderGlobe() {
         setReSpin(true);
         if (practiceMode) {
-            return navigate("/");
+            return navigate("/?practice_mode=true");
         }
-        navigate("/game");
+        navigate("/");
     }
 
     console.log('###RENDER### header');

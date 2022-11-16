@@ -50,5 +50,3 @@ export default function Switch({name, toggle, setToggle, on, off, top, bottom, c
         </div>
     );
 }
-
-

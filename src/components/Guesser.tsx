@@ -46,6 +46,7 @@ export default function Guesser({
     const [guessName, setGuessName] = useState("");
     const [guessFlag, setGuessFlag] = useState("");
     const [error, setError] = useState("");
+    const [autoCompleteIndex, setAutoCompleteIndex] = useState(1);
     const {locale} = useContext(LocaleContext);
 
     const langName = langNameMap[locale];
@@ -54,19 +55,11 @@ export default function Guesser({
     const guessHolderRef = useRef<HTMLInputElement>(null);
 
     const handleOnSelect = (item: AutocompleteItem) => {
-        setGuessFlag(item.flag)
-        setGuessName(item.name)
+        setGuessFlag(item.flag);
+        setGuessName(item.name);
     }
 
     const handleOnClear = () => {
-        const input = guessHolderRef?.current?.querySelector('input');
-
-        console.log('handleOnClear', input);
-
-        if (input) {
-            input.value = '';
-        }
-
         setGuessFlag('');
     }
 
@@ -152,6 +145,8 @@ export default function Guesser({
     function addGuess(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         setError("");
+        setGuessFlag("");
+        setAutoCompleteIndex(autoCompleteIndex + 1);
         let guessCountry = runChecks();
 
         // console.log('answerCountry', guessName, guessCountry, answerCountry);
@@ -215,6 +210,7 @@ export default function Guesser({
             <form className="autocomplete-form" onSubmit={addGuess}>
                 <div ref={guessHolderRef} className={"autocomplete-holder" + (win ? ' __disabled' : '')}>
                     <ReactSearchAutocomplete
+                        key={autoCompleteIndex}
                         items={autocompleteList}
                         showIcon={false}
                         showClear={true}

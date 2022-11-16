@@ -16,15 +16,19 @@
   }
 
   &-holder {
+    text-align: center;
     display: grid;
     gap: 18px;
     grid-template-columns: repeat(3, 1fr);
+
+    @media screen and (max-width: 480px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   &-cell {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-flow: column nowrap;
     gap: 6px;
     padding: 20px 10px 14px;

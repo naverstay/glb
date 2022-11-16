@@ -56,10 +56,6 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
 
         console.log('enterPracticeMode', practiceAnswer);
 
-        // const practiceAnswer = countryData.find((country) => {
-        //     return country.properties.NAME === "Bolivia";
-        // });
-
         localStorage.setItem("practice", JSON.stringify(practiceAnswer));
         // navigate("/game?practice_mode=true");
         setGuesses([]);
@@ -206,7 +202,7 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
                             practiceMode={practiceMode}
                         />
 
-                        {practiceMode && win ?
+                        {practiceMode ?
                             <div className="suggestion-control">
                                 <button className="btn btn-darkblue" onClick={enterPracticeMode}>
                                     <FormattedMessage id={"PracticeNew"}/>

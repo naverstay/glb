@@ -22,7 +22,7 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
     const [places, setPlaces] = useState(guesses);
 
     // Theme
-    const {nightMode, prideMode = false, highContrast} = useContext(ThemeContext).theme;
+    const {nightMode = false, prideMode = false, highContrast = false} = useContext(ThemeContext).theme;
 
     // Globe size settings
     const size = isMobile ? 320 : 600; // px on one side
