@@ -58,7 +58,6 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
         if (newGuess) {
             const controls: any = globeRef.current.controls();
             controls.autoRotate = false;
-            console.log('Globe', newGuess);
             const newSpot = findCentre(newGuess);
             turnGlobe(newSpot, globeRef, "zoom");
         }

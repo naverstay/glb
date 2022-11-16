@@ -1,4 +1,4 @@
-import {FormEvent, useContext, useState, useRef, useEffect, useMemo} from "react";
+import React, {FormEvent, useContext, useState, useRef, useEffect, useMemo} from "react";
 import {Country} from "../lib/country";
 import {answerCountry, answerName} from "../util/answer";
 import {Message} from "./Message";
@@ -10,6 +10,7 @@ import localeList from "../i18n/messages";
 import {FormattedMessage} from "react-intl";
 import {langNameMap} from "../i18n/locales";
 import {AltNames} from "../lib/alternateNames";
+import {fireEvent} from "@testing-library/react";
 
 const countryData: Country[] = require("../data/country_data.json").features;
 const alternateNames: AltNames = require("../data/alternate_names.json");
@@ -207,6 +208,7 @@ export default function Guesser({
                     <ReactSearchAutocomplete
                         key={autoCompleteIndex}
                         items={autocompleteList}
+                        showItemsOnFocus={true}
                         showIcon={false}
                         showClear={true}
                         maxResults={10}

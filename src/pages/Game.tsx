@@ -74,7 +74,6 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
 
     // goto practiceMode
     useEffect(() => {
-        console.log('enterPracticeMode', practiceMode);
         if (practiceMode) {
             enterPracticeMode();
             navigate("/?practice_mode=true")
@@ -89,7 +88,11 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
     }, [practiceMode, navigate, reSpin, setReSpin]);
 
     const storedCountries = useMemo(() => {
-        const list = today <= storedGuesses.day && !practiceMode ? storedGuesses : practiceStoredGuesses;
+        const list = practiceMode ? practiceStoredGuesses : (today === storedGuesses.day ? storedGuesses : null);
+
+        if (list === null) {
+            return []
+        }
 
         const names = list.countries;
         return names.map((guess) => {
