@@ -3,19 +3,20 @@ import {polygonDirection, polygonDistance} from "../util/distance";
 import {getColour} from "../util/colour";
 import {useContext} from "react";
 import {ThemeContext} from "../context/ThemeContext";
-import {getPath} from "../util/svg";
 import {FormattedMessage} from "react-intl";
+import {COUNTRY_PATH_BRAZIL, COUNTRY_PATH_CANADA, COUNTRY_PATH_COLOMBIA, COUNTRY_PATH_MEXICO} from "../data/constants";
 
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
     countryName: string;
     width: number;
+    index: number;
 };
 
-export default function Outline({countryName, width}: Props) {
+export default function Outline({countryName, width, index}: Props) {
     const {nightMode, highContrast, prideMode = false} = useContext(ThemeContext).theme;
-
+    const paths = [COUNTRY_PATH_CANADA, COUNTRY_PATH_MEXICO, COUNTRY_PATH_COLOMBIA, COUNTRY_PATH_BRAZIL]
     const country = countryData.find((p) => p.properties.NAME === countryName);
 
     if (!country) {
@@ -36,8 +37,6 @@ export default function Outline({countryName, width}: Props) {
 
     countryCopy["proximity"] = polygonDistance(countryCopy, sampleAnswer);
     countryCopy["direction"] = polygonDirection(countryCopy, sampleAnswer);
-
-    const outline = getPath(countryName);
 
     const colour = getColour(
         countryCopy,
@@ -63,7 +62,7 @@ export default function Outline({countryName, width}: Props) {
                 preserveAspectRatio="xMidYMid meet"
             >
                 <g id={countryName}>
-                    <path transform="translate(0,1024) scale(0.1,-0.1)" fill={colour} d={outline} stroke="black"/>
+                    <path transform="translate(0,1024) scale(0.1,-0.1)" fill={colour} d={paths[index]} stroke="black"/>
                 </g>
             </svg>
         </figure>

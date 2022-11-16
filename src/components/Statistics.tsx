@@ -1,4 +1,4 @@
-import {useContext,  useRef, useState} from "react";
+import {useContext, useRef, useState} from "react";
 import {useLocalStorage} from "../hooks/useLocalStorage";
 import {Stats} from "../lib/localStorage";
 import {isMobile} from "react-device-detect";
@@ -20,6 +20,7 @@ export default function Statistics({closeCallback}: Props) {
 
     // Stats data
     const firstStats = {
+        gamesPlayed: 0,
         gamesWon: 0,
         lastWin: new Date(0).toLocaleDateString("en-CA"),
         currentStreak: 0,
@@ -33,6 +34,7 @@ export default function Statistics({closeCallback}: Props) {
         firstStats
     );
     const {
+        gamesPlayed,
         gamesWon,
         lastWin,
         currentStreak,
@@ -54,7 +56,7 @@ export default function Statistics({closeCallback}: Props) {
         : localeList[locale]["Stats6"];
 
     const statsTable = [
-        {label: localeList[locale]["Stats1"], value: showLastWin},
+        {label: localeList[locale]["Stats1"], value: gamesPlayed},
         {label: localeList[locale]["Stats2"], value: todaysGuesses},
         {label: localeList[locale]["Stats3"], value: gamesWon},
         {label: localeList[locale]["Stats4"], value: currentStreak},

@@ -1,6 +1,4 @@
-// import useCheckMobile from "../hooks/useCheckMobile";
-import {useContext} from "react";
-// import {isMobile} from "react-device-detect";
+import {useContext, useEffect, useState} from "react";
 import {ThemeContext} from "../context/ThemeContext";
 import Fade from "../transitions/Fade";
 import Outline from "../components/Outline";
@@ -16,7 +14,18 @@ export default function Help({closeCallback}: Props) {
     const {nightMode} = useContext(ThemeContext).theme;
 
     const countrySize = 150;
-    const outlines: string[] = ["Canada", "Mexico", "Colombia", "Brazil"];
+    const [outlines, setOutlines] = useState<string[]>([]);
+
+    useEffect(() => {
+        const outlineTimer = setTimeout(() => {
+            setOutlines(["Canada", "Mexico", "Colombia", "Brazil"]);
+        }, 500);
+
+        return () => {
+            setOutlines([]);
+            clearTimeout(outlineTimer);
+        }
+    }, [])
 
     return (
         <div className="popup-content">
@@ -64,8 +73,8 @@ export default function Help({closeCallback}: Props) {
                 <div className="popup-countries">
                     {outlines.map((country, idx) => {
                         return (
-                            <Fade show={true} background="" key={idx} delay={(idx + .5) + 's'}>
-                                <Outline key={idx} countryName={country} width={countrySize}/>
+                            <Fade key={idx} show={true} background="country-block" delay={((idx / 2) + .25) + 's'}>
+                                <Outline key={idx} index={idx} countryName={country} width={countrySize}/>
                             </Fade>
                         );
                     })}
@@ -73,7 +82,6 @@ export default function Help({closeCallback}: Props) {
                 <p className="text-center fw-b">
                     <FormattedMessage id="help3"/>
                 </p>
-                {/*<Auxilliary screen="Help"/>*/}
             </div>
         </div>
     );

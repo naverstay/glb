@@ -34,6 +34,7 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
     });
 
     const firstStats = {
+        gamesPlayed: 0,
         gamesWon: 0,
         lastWin: new Date(0).toLocaleDateString("en-CA"),
         currentStreak: 0,
@@ -130,6 +131,7 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
     useEffect(() => {
         if (win && storedStats.lastWin !== today && !practiceMode) {
             // Store new stats in local storage
+            const gamesPlayed = 0;
             const lastWin = today;
             const gamesWon = storedStats.gamesWon + 1;
             const streakBroken = dateDiffInDays(storedStats.lastWin, lastWin) > 1;
@@ -151,6 +153,7 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
                 )
                 .join("\n");
             const newStats = {
+                gamesPlayed,
                 lastWin,
                 gamesWon,
                 currentStreak,

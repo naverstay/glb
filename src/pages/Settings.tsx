@@ -8,11 +8,13 @@ import {getPath} from "../util/svg";
 
 type Props = {
     closeCallback: React.Dispatch<React.SetStateAction<string>>;
+    setPracticeMode: React.Dispatch<React.SetStateAction<boolean>>;
     setMiles: React.Dispatch<React.SetStateAction<boolean>>;
+    practiceMode: boolean;
     miles: boolean;
 };
 
-export default function Settings({closeCallback, setMiles, miles}: Props) {
+export default function Settings({closeCallback, setMiles, miles, setPracticeMode, practiceMode}: Props) {
     const themeContext = useContext(ThemeContext);
     const [toggleTheme, setToggleTheme] = useState(!themeContext.theme.nightMode);
     // const [togglePride, setTogglePride] = useState(!themeContext.theme.prideMode);
@@ -74,13 +76,15 @@ export default function Settings({closeCallback, setMiles, miles}: Props) {
             // top: localeList[locale]["Settings3"],
             // bottom: localeList[locale]["Settings4"],
         },
-        // {
-        //     name: "scope",
-        //     setToggle: setToggleScope,
-        //     toggle: toggleScope,
-        //     on: localeList[locale]["Settings5"],
-        //     off: localeList[locale]["Settings6"],
-        // },
+        {
+            name: localeList[locale]["Settings4"],
+            setToggle: setPracticeMode,
+            toggle: practiceMode,
+            on: "",
+            off: "",
+            // top: localeList[locale]["Settings5"],
+            // bottom: localeList[locale]["Settings9"],
+        },
     ];
 
     return (

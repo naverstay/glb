@@ -53,7 +53,12 @@ function App() {
 
             <Fade show={showPopup === 'settings'} background={"popup-holder"} closeCallback={setShowPopup}>
                 <div className="popup container">
-                    <Settings setMiles={setMiles} miles={miles} closeCallback={setShowPopup}/>
+                    <Settings
+                        setPracticeMode={setPracticeMode}
+                        practiceMode={practiceMode}
+                        setMiles={setMiles}
+                        miles={miles}
+                        closeCallback={setShowPopup}/>
                 </div>
             </Fade>
 

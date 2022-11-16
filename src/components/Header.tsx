@@ -33,18 +33,6 @@ export default function Header({setReSpin, setShowPopup, practiceMode, setPracti
         <header className="header">
             <div className="container">
                 <div className="header-cell">
-                    <Toggle
-                        customClass=" toggle-blue"
-                        name="practiceMode"
-                        setToggle={setPracticeMode}
-                        toggle={practiceMode}
-                        on="24"
-                        off="&nbsp;&nbsp;∞"
-                        top="Daily"
-                        bottom="Practice"
-                    />
-                </div>
-                <div className="header-cell">
                      <span className="logo" onClick={reRenderGlobe}
                      >GLOBLE</span>
                 </div>
@@ -52,36 +40,15 @@ export default function Header({setReSpin, setShowPopup, practiceMode, setPracti
                 <div className="header-cell">
 
                     <button className="btn btn-blue" onClick={() => setShowPopup('stats')} aria-label="Statistics">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            width="24"
-                        >
-                            <path fill={svgColour} d={getPath("stats")}/>
-                        </svg>
+                        <span dangerouslySetInnerHTML={{__html: getPath("stats")}}/>
                     </button>
 
                     <button className="btn btn-blue" onClick={() => setShowPopup('settings')} aria-label="Settings">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            width="24"
-                        >
-                            <path fill={svgColour} d={getPath("settings")}/>
-                        </svg>
+                        <span dangerouslySetInnerHTML={{__html: getPath("settings")}}/>
                     </button>
 
                     <button className="btn btn-blue" onClick={() => setShowPopup('help')} aria-label="Help">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            width="24"
-                        >
-                            <path fill={svgColour} d={getPath("help")}/>
-                        </svg>
+                        <span dangerouslySetInnerHTML={{__html: getPath("help")}}/>
                     </button>
                 </div>
             </div>

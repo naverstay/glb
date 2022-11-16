@@ -1,4 +1,5 @@
 export type Stats = {
+  gamesPlayed: number;
   gamesWon: number;
   lastWin: string;
   currentStreak: number;
