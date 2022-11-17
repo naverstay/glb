@@ -53,10 +53,10 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
     // Set up practice mode
     // const navigate = useNavigate();
 
-    function enterPracticeMode() {
+    function enterPracticeMode(force?: boolean) {
         console.log('enterPracticeMode', practiceStoredGuesses);
 
-        if (practiceStoredGuesses?.day === '' && practiceStoredGuesses?.countries?.length) {
+        if (!force && practiceStoredGuesses?.day === '' && practiceStoredGuesses?.countries?.length) {
             const loadCountries: Country[] = countryData.filter(m => practiceStoredGuesses.countries.indexOf(m.properties.NAME) > -1)
 
             setGuesses(loadCountries);
@@ -242,7 +242,9 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
 
                         {practiceMode ?
                             <div className="suggestion-control">
-                                <button className="btn btn-darkblue" onClick={enterPracticeMode}>
+                                <button className="btn btn-darkblue" onClick={() => {
+                                    enterPracticeMode(true)
+                                }}>
                                     <FormattedMessage id={"PracticeNew"}/>
                                 </button>
                             </div>
