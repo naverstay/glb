@@ -253,9 +253,9 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
                     </div>
                 )}
 
-                {/*<p>*/}
-                {/*    answerCountry: {answerCountry.properties.ADMIN}*/}
-                {/*</p>*/}
+                <p>
+                    answerCountry: {answerCountry.properties.ADMIN}
+                </p>
             </div>
         </Suspense>
     );
