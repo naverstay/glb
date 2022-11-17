@@ -262,7 +262,7 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
                 )}
 
                 <p>
-                    answerCountry: {answerCountry.properties.ADMIN}
+                    answerCountry: {answerCountry.properties.NAME}
                 </p>
             </div>
         </Suspense>
