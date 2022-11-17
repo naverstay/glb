@@ -10,6 +10,7 @@ import {DIRECTION_ARROWS} from "../util/distance";
 
 type Props = {
     guesses: Country[];
+    answerName: string;
     win: boolean;
     globeRef: React.MutableRefObject<GlobeMethods>;
     setMiles: React.Dispatch<React.SetStateAction<boolean>>;
@@ -48,7 +49,7 @@ function reorderGuesses(guessList: Country[], practiceMode: boolean) {
     });
 }
 
-export default function List({guesses, win, globeRef, practiceMode, setMiles, miles}: Props) {
+export default function List({guesses, answerName, win, globeRef, practiceMode, setMiles, miles}: Props) {
     const [orderedGuesses, setOrderedGuesses] = useState(
         reorderGuesses(guesses, practiceMode)
     );
@@ -119,14 +120,14 @@ export default function List({guesses, win, globeRef, practiceMode, setMiles, mi
                     }
 
                     return (
-                        <li key={idx} className={"suggestion-list__row" + (win && idx === 0 ? ' __bingo' : '')}>
+                        <li key={idx}
+                            className={"suggestion-list__row" + (win && idx === 0 ? ' __bingo' : '')}>
                             <div className="suggestion-list__name"
                                  onClick={(e) => turnToCountry(e, idx)}>
                                 <div className="suggestion-list__flag">
                                     <img
                                         src={`https://flagcdn.com/w40/${flag.toLowerCase()}.png`}
                                         alt={name}
-                                        className=""
                                     />
                                 </div>
                                 <span>{name}</span>

@@ -128,7 +128,14 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
         if (!practiceMode) {
             setGuesses(storedCountries);
         }
-    }, [practiceMode, setGuesses, storedCountries, alreadyWon]);
+    }, [practiceMode, setGuesses, storedCountries]);
+
+
+    useEffect(() => {
+        if (!practiceMode) {
+            setWin(alreadyWon);
+        }
+    }, [alreadyWon, practiceMode]);
 
     // Whenever there's a new guess
     useEffect(() => {
@@ -232,6 +239,7 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
                             practiceMode={practiceMode}
                         />
                         <List
+                            answerName={answerName}
                             setMiles={setMiles}
                             miles={miles}
                             guesses={guesses}
