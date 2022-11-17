@@ -126,7 +126,7 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
     // Whenever there's a new guess
     useEffect(() => {
         if (!practiceMode) {
-            setGuesses(alreadyWon ? [] : storedCountries);
+            setGuesses(storedCountries);
         }
     }, [practiceMode, setGuesses, storedCountries, alreadyWon]);
 
