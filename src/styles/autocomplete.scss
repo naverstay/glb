@@ -5,6 +5,14 @@
     text-align: center;
     min-height: 2em;
 
+    a {
+      color: inherit;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
     &.__info {
       color: $text-blue-color;
     }
@@ -25,6 +33,19 @@
     position: sticky;
     top: -10px;
     z-index: 2;
+
+    &.__pinned {
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 100vw;
+        left: 50%;
+        height: 1px;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, .75);
+      }
+    }
   }
 
   &-form {
@@ -43,6 +64,16 @@
   &-holder {
     position: relative;
     z-index: 1;
+
+    .wrapper {
+      background-color: $autocomplete-bg !important;
+      border-color: $autocomplete-border !important;
+      color: $autocomplete-result-text !important;
+
+      li.selected {
+        background-color: $autocomplete-hover-bg !important;
+      }
+    }
 
     .result-item {
       display: grid;

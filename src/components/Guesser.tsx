@@ -35,6 +35,10 @@ type Props = {
     practiceMode: boolean;
 };
 
+const getScrollTop = () => {
+    return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+}
+
 export default function Guesser({
                                     guesses,
                                     setGuesses,
@@ -52,6 +56,7 @@ export default function Guesser({
 
     const guessInputRef = useRef<HTMLInputElement>(null);
     const guessHolderRef = useRef<HTMLInputElement>(null);
+    const aotocompleteRef = useRef(null);
 
     const handleOnSelect = (item: AutocompleteItem) => {
         setGuessFlag(item.flag);
@@ -196,10 +201,27 @@ export default function Guesser({
         })
     }, []);
 
+    useEffect(() => {
+        const el = aotocompleteRef.current;
+        const observer = new IntersectionObserver(
+            ([e]) => e.target.classList.toggle('__pinned', getScrollTop() > 0 && e.intersectionRatio < 1)
+            ,
+            {threshold: [1]},
+        );
+
+        if (el) {
+            observer.observe(el);
+        }
+
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
+
     console.log('###RENDER### Guesser');
 
     return (
-        <div className="autocomplete-wrapper">
+        <div ref={aotocompleteRef} className="autocomplete-wrapper">
             <style>{css}</style>
             <form className="autocomplete-form" onSubmit={addGuess}>
                 <div ref={guessHolderRef} className={"autocomplete-holder" + (win ? ' __disabled' : '')}>
@@ -236,7 +258,7 @@ export default function Guesser({
                                 ]
                             }
                         }
-                        placeholder={guesses.length === 0 ? localeList[locale]["Game1"] : ""}
+                        placeholder={localeList[locale]["Game1"]}
                         // onSearch={handleOnSearch}
                         // onHover={handleOnHover}
                         onSelect={handleOnSelect}

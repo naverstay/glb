@@ -12,6 +12,8 @@
   --text-green-light-color: #c5f5cf;
   --text-blue-color: #0b8fe6;
   --text-blue-color-light: #d8e9f4;
+  --btn-blue-hover: #0173be;
+  --btn-darkblue-hover: #032840;
   --btn-green-bg: #0fbb50;
   --btn-blue-text: #0e3751;
   --btn-blue-bg: #d7efff;
@@ -21,6 +23,10 @@
   --btn-gray-border: #bdbdbd;
   --btn-gray-border-light: #d5e0e7;
   --btn-gray-color: #536068;
+  --autocomplete-bg: #fff;
+  --autocomplete-border: #dfe1e5;
+  --autocomplete-hover-bg: #b4b5bb;
+  --autocomplete-result-text: #477eea;
 }
 
 $text-main-color: var(--text-main-color);
@@ -35,6 +41,8 @@ $text-green-color: var(--text-green-color);
 $text-green-light-color: var(--text-green-light-color);
 $text-blue-color: var(--text-blue-color);
 $text-blue-color-light: var(--text-blue-color-light);
+$btn-blue-hover: var(--btn-blue-hover);
+$btn-darkblue-hover: var(--btn-darkblue-hover);
 $btn-green-bg: var(--btn-green-bg);
 $btn-blue-text: var(--btn-blue-text);
 $btn-blue-bg: var(--btn-blue-bg);
@@ -44,6 +52,10 @@ $btn-gray-bg-light: var(--btn-gray-bg-light);
 $btn-gray-border: var(--btn-gray-border);
 $btn-gray-border-light: var(--btn-gray-border-light);
 $btn-gray-color: var(--btn-gray-color);
+$autocomplete-bg: var(--autocomplete-bg);
+$autocomplete-border: var(--autocomplete-border);
+$autocomplete-hover-bg: var(--autocomplete-hover-bg);
+$autocomplete-result-text: var(--autocomplete-result-text);
 
 .dark:root {
   --app-bg-color: #040c1e;
@@ -57,6 +69,8 @@ $btn-gray-color: var(--btn-gray-color);
   --text-green-light-color: #0d4f1b;
   --text-blue-color: #1469a1;
   --text-blue-color-light: #11374f;
+  --btn-blue-hover: #0173be;
+  --btn-darkblue-hover: #032840;
   --btn-green-bg: #0fbb50;
   --btn-blue-text: #ffffff;
   --btn-blue-bg: #164565;
@@ -66,4 +80,8 @@ $btn-gray-color: var(--btn-gray-color);
   --btn-gray-border: #1e435c;
   --btn-gray-border-light: #3d5c72;
   --btn-gray-color: #536068;
+  --autocomplete-bg: #bbb7b7;
+  --autocomplete-border: #a9aaad;
+  --autocomplete-hover-bg: #616265;
+  --autocomplete-result-text: #1258df;
 }
