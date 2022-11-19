@@ -39,7 +39,8 @@ export function Message({win, error, guesses, practiceMode}: Props) {
         return (
             <p className="autocomplete-message __success">
                 <FormattedMessage id="Game7" values={{
-                    answer: <a target="_blank" href={"https://en.wikipedia.org/wiki/" + name}>{name}</a>
+                    answer: <a target="_blank" rel="noreferrer"
+                               href={"https://en.wikipedia.org/wiki/" + name}>{name}</a>
                 }}/>
             </p>
         );
