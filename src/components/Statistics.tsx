@@ -34,6 +34,7 @@ export default function Statistics({closeCallback}: Props) {
         firstStats
     );
     const {
+        // gamesPlayed,
         gamesWon,
         lastWin,
         currentStreak,

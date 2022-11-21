@@ -47,3 +47,15 @@
   font-size: 26px;
   color: $text-main-color;
 }
+
+
+.loader {
+  width: 100px;
+  height: 100px;
+  margin: 100px auto;
+  display: block;
+
+  svg path {
+    fill: var(--text-green-color);
+  }
+}

@@ -3,7 +3,7 @@ import {Route, Routes, useSearchParams} from "react-router-dom";
 import Game from "./pages/Game";
 import Header from "./components/Header";
 import Help from "./pages/Help";
-import Info from "./pages/Info";
+// import Info from "./pages/Info";
 import Settings from "./pages/Settings";
 import Statistics from "./components/Statistics";
 import {ThemeContext} from "./context/ThemeContext";
@@ -71,7 +71,7 @@ function App() {
                                       setReSpin={setReSpin}
                                       setShowStats={setShowPopup}/>}/>
 
-                <Route path="/info" element={<Info/>}/>
+                {/*<Route path="/info" element={<Info/>}/>*/}
             </Routes>
         </div>
     );

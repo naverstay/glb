@@ -214,9 +214,9 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
     // Fallback while loading
     const renderLoader = () => (
         <div className="container">
-            <p>
-                <FormattedMessage id="Loading"/>
-            </p>
+            <span className="loader">
+                 <FormattedMessage id="Loading"/>
+            </span>
         </div>
     );
 
