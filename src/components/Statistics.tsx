@@ -49,6 +49,7 @@ export default function Statistics({closeCallback}: Props) {
     const todaysGuesses =
         lastWin === today ? usedGuesses[usedGuesses.length - 1] : "--";
 
+    const showLastWin = lastWin >= "2022-01-01" ? lastWin : "--";
     const winPercent = gamesWon && gamesPlayed ? Math.ceil(100 * (gamesWon / gamesPlayed)) : "--";
 
     const avgShorthand = isMobile
@@ -56,9 +57,9 @@ export default function Statistics({closeCallback}: Props) {
         : localeList[locale]["Stats6"];
 
     const statsTable = [
-        {label: localeList[locale]["Stats1"], value: gamesPlayed},
-        {label: localeList[locale]["Stats2"], value: gamesWon},
-        {label: localeList[locale]["Stats3"], value: winPercent},
+        {label: localeList[locale]["Stats1"], value: showLastWin},
+        {label: localeList[locale]["Stats2"], value: todaysGuesses},
+        {label: localeList[locale]["Stats3"], value: gamesWon},
         {label: localeList[locale]["Stats4"], value: currentStreak},
         {label: localeList[locale]["Stats5"], value: maxStreak},
         {label: avgShorthand, value: showAvgGuesses},
