@@ -3,18 +3,18 @@ import {getPath} from "../util/svg";
 
 type Props = {
     practiceMode: boolean;
-    setReSpin: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowLoader: React.Dispatch<React.SetStateAction<boolean>>;
     setShowPopup: React.Dispatch<React.SetStateAction<string>>;
     setPracticeMode: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function Header({setReSpin, setShowPopup, practiceMode, setPracticeMode}: Props) {
+export default function Header({setShowLoader, setShowPopup, practiceMode, setPracticeMode}: Props) {
     const navigate = useNavigate();
 
     // Set up practice mode
 
     function reRenderGlobe() {
-        setReSpin(true);
+        setShowLoader(true);
         if (practiceMode) {
             return navigate("/?practice_mode=true");
         }

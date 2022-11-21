@@ -16,15 +16,15 @@ const List = lazy(() => import("../components/List"));
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
-    reSpin: boolean;
+    showLoader: boolean;
     practiceMode: boolean;
-    setReSpin: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowLoader: React.Dispatch<React.SetStateAction<boolean>>;
     setShowStats: React.Dispatch<React.SetStateAction<string>>;
     setMiles: React.Dispatch<React.SetStateAction<boolean>>;
     miles: boolean;
 };
 
-export default function Game({reSpin, setReSpin, setShowStats, practiceMode, setMiles, miles}: Props) {
+export default function Game({showLoader, setShowLoader, setShowStats, practiceMode, setMiles, miles}: Props) {
     const navigate = useNavigate();
 
     // Get data from local storage
@@ -81,11 +81,11 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
             navigate("/")
         }
 
-        if (reSpin) setTimeout(() => {
-            setReSpin(false);
+        if (showLoader) setTimeout(() => {
+            setShowLoader(false);
         }, 1);
         // eslint-disable-next-line
-    }, [practiceMode, navigate, reSpin, setReSpin]);
+    }, [practiceMode, navigate, showLoader, setShowLoader]);
 
     const storedCountries = useMemo(() => {
         const list = practiceMode ? practiceStoredGuesses : (today === storedGuesses.day ? storedGuesses : null);
@@ -231,7 +231,7 @@ export default function Game({reSpin, setReSpin, setShowStats, practiceMode, set
                     practiceMode={practiceMode}
                 />
 
-                {!reSpin && (
+                {!showLoader && (
                     <div className="globe-holder">
                         <Globe
                             guesses={guesses}

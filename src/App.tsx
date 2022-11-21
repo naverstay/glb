@@ -13,7 +13,7 @@ function App() {
     const [params] = useSearchParams();
 
     // State
-    const [reSpin, setReSpin] = useState(false);
+    const [showLoader, setShowLoader] = useState(false);
     const [miles, setMiles] = useState(false);
 
     const [showPopup, setShowPopup] = useState('');
@@ -24,8 +24,8 @@ function App() {
 
     // Re-render globe
     useEffect(() => {
-        if (reSpin) setTimeout(() => setReSpin(false), 1);
-    }, [reSpin]);
+        if (showLoader) setTimeout(() => setShowLoader(false), 1);
+    }, [showLoader]);
 
     // change theme
     useEffect(() => {
@@ -36,7 +36,7 @@ function App() {
         <div className={`page`}>
             <Header practiceMode={practiceMode}
                     setPracticeMode={setPracticeMode}
-                    setReSpin={setReSpin}
+                    setShowLoader={setShowLoader}
                     setShowPopup={setShowPopup}/>
 
             <Fade show={showPopup === 'stats'} background={"popup-holder"} closeCallback={setShowPopup}>
@@ -67,8 +67,8 @@ function App() {
                        element={<Game setMiles={setMiles}
                                       miles={miles}
                                       practiceMode={practiceMode}
-                                      reSpin={reSpin}
-                                      setReSpin={setReSpin}
+                                      showLoader={showLoader}
+                                      setShowLoader={setShowLoader}
                                       setShowStats={setShowPopup}/>}/>
 
                 {/*<Route path="/info" element={<Info/>}/>*/}

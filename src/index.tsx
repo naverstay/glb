@@ -4,7 +4,6 @@ import "./index.scss";
 import App from "./App";
 import { ThemeProvider } from "./context/ThemeContext";
 import LocaleProvider from "./i18n";
-import BodyStyle from "./components/BodyStyle";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
@@ -13,7 +12,6 @@ ReactDOM.render(
       <LocaleProvider>
         <BrowserRouter>
           <App />
-          <BodyStyle />
         </BrowserRouter>
       </LocaleProvider>
     </ThemeProvider>
