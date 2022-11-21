@@ -7,7 +7,7 @@ import {Guesses, Stats} from "../lib/localStorage";
 import {dateDiffInDays, today} from "../util/dates";
 import {polygonDirection, polygonDistance} from "../util/distance";
 import {getColourEmoji} from "../util/colour";
-import {FormattedMessage} from "react-intl";
+import {FormattedMessage} from "../context/FormattedMessage";
 import {useNavigate} from "react-router-dom";
 
 const Globe = lazy(() => import("../components/Globe"));

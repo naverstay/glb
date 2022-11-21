@@ -2,7 +2,8 @@ import React, {useContext, useEffect, useState} from "react";
 import {ThemeContext} from "../context/ThemeContext";
 import {LocaleContext} from "../i18n/LocaleContext";
 import localeList from "../i18n/messages";
-import {FormattedMessage} from "react-intl";
+// import {FormattedMessage} from "react-intl";
+import {FormattedMessage} from "../context/FormattedMessage";
 import Toggle from "../components/Toggle";
 import {getPath} from "../util/svg";
 
@@ -17,11 +18,8 @@ type Props = {
 export default function Settings({closeCallback, setMiles, miles, setPracticeMode, practiceMode}: Props) {
     const themeContext = useContext(ThemeContext);
     const [toggleTheme, setToggleTheme] = useState(themeContext.theme.nightMode);
-    // const [togglePride, setTogglePride] = useState(!themeContext.theme.prideMode);
     const [toggleHighContrast, setToggleHighContrast] = useState(themeContext.theme.highContrast);
     const {locale} = useContext(LocaleContext);
-
-    // const [toggleScope, setToggleScope] = useState(true);
 
     const {setTheme} = themeContext;
 
@@ -33,55 +31,36 @@ export default function Settings({closeCallback, setMiles, miles, setPracticeMod
                 milesMode: miles,
             });
         }
-    }, [toggleTheme, toggleHighContrast, setTheme, miles
-        // , togglePride
-    ]);
+    }, [toggleTheme, toggleHighContrast, setTheme, miles]);
 
     const options = [
         {
             name: localeList[locale]["Settings2"],
             setToggle: setToggleTheme,
             toggle: toggleTheme,
-            on: "", // localeList[locale]["Settings2"],
-            off: "", // localeList[locale]["Settings1"],
-            // top: localeList[locale]["Settings2"],
-            // bottom: localeList[locale]["Settings1"],
+            on: "",
+            off: "",
         },
-        // {
-        //     name: "pride",
-        //     setToggle: setTogglePride,
-        //     toggle: togglePride,
-        //     on: "", // localeList[locale]["Settings10"],
-        //     off: "", // localeList[locale]["Settings11"],
-        //     // top: localeList[locale]["Settings10"],
-        //     // bottom: localeList[locale]["Settings11"],
-        // },
         {
             name: localeList[locale]["Settings3"],
             setToggle: setToggleHighContrast,
             toggle: toggleHighContrast,
-            on: "", // localeList[locale]["Settings3"],
-            off: "", // localeList[locale]["Settings4"],
-            // top: localeList[locale]["Settings3"],
-            // bottom: localeList[locale]["Settings4"],
+            on: "",
+            off: "",
         },
         {
             name: localeList[locale]["Settings5"],
             setToggle: setMiles,
             toggle: miles,
-            on: "", // localeList[locale]["Settings3"],
-            off: "", // localeList[locale]["Settings4"],
-            // top: localeList[locale]["Settings3"],
-            // bottom: localeList[locale]["Settings4"],
+            on: "",
+            off: "",
         },
         {
             name: localeList[locale]["Settings4"],
             setToggle: setPracticeMode,
             toggle: practiceMode,
             on: "",
-            off: "",
-            // top: localeList[locale]["Settings5"],
-            // bottom: localeList[locale]["Settings9"],
+            off: ""
         },
     ];
 

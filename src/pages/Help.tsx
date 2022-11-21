@@ -1,6 +1,7 @@
 import {useContext} from "react";
 import {ThemeContext} from "../context/ThemeContext";
-import {FormattedMessage} from "react-intl";
+// import {FormattedMessage} from "react-intl";
+import {FormattedMessage} from "../context/FormattedMessage";
 import {getPath} from "../util/svg";
 
 type Props = {

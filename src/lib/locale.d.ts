@@ -1,7 +1,7 @@
 export type Locale = "en-CA";
 
 export type Messages = {
-  name: sting;
+  name: string;
   helpTitle: string;
   help1: string;
   help2: string;

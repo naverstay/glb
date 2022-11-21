@@ -5,8 +5,7 @@ import {isMobile} from "react-device-detect";
 import {getPath} from "../util/svg";
 import {today} from "../util/dates";
 import {isFirefox} from "react-device-detect";
-import {FormattedMessage} from "react-intl";
-import {LocaleContext} from "../i18n/LocaleContext";
+import {FormattedMessage} from "../context/FormattedMessage";
 import localeList from "../i18n/messages";
 import Fade from "../transitions/Fade";
 
@@ -15,8 +14,7 @@ type Props = {
 };
 
 export default function Statistics({closeCallback}: Props) {
-    const localeContext = useContext(LocaleContext);
-    const {locale} = localeContext;
+    const locale = 'en-CA';
 
     // Stats data
     const firstStats = {
@@ -67,20 +65,6 @@ export default function Statistics({closeCallback}: Props) {
 
     // Closing the modal
     const modalRef = useRef<HTMLDivElement>(null!);
-
-    // useEffect(() => {
-    //     function closeModal(e: MouseEvent) {
-    //         const target = e.target as HTMLElement;
-    //         if (!modalRef.current?.contains(target)) {
-    //             closeCallback('');
-    //         }
-    //     }
-    //
-    //     document.addEventListener("click", closeModal);
-    //     return () => {
-    //         document.removeEventListener("click", closeModal);
-    //     };
-    // }, [closeCallback]);
 
     // Reset stats
     const [msg, setMsg] = useState("");

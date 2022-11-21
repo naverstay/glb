@@ -1,13 +1,11 @@
-import React, {FormEvent, useContext, useState, useRef, useEffect, useMemo} from "react";
+import React, {FormEvent, useState, useRef, useEffect, useMemo} from "react";
 import {Country} from "../lib/country";
 import {answerCountry, answerName} from "../util/answer";
 import {Message} from "./Message";
 import {polygonDirection, polygonDistance} from "../util/distance";
 import {ReactSearchAutocomplete} from 'react-search-autocomplete';
-import {LocaleContext} from "../i18n/LocaleContext";
 import localeList from "../i18n/messages";
-import {FormattedMessage} from "react-intl";
-import {langNameMap} from "../i18n/locales";
+import {FormattedMessage} from "../context/FormattedMessage";
 import {AltNames} from "../lib/alternateNames";
 
 const countryData: Country[] = require("../data/country_data.json").features;
@@ -50,9 +48,10 @@ export default function Guesser({
     const [guessFlag, setGuessFlag] = useState("");
     const [error, setError] = useState("");
     const [autoCompleteIndex, setAutoCompleteIndex] = useState(1);
-    const {locale} = useContext(LocaleContext);
+    const locale = 'en-CA';
+    const langName = 'NAME_EN';
 
-    const langName = langNameMap[locale];
+    console.log('locale', locale, langName);
 
     const guessInputRef = useRef<HTMLInputElement>(null);
     const guessHolderRef = useRef<HTMLInputElement>(null);

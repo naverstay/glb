@@ -1,9 +1,7 @@
-import React, {SyntheticEvent, useContext, useEffect, useMemo, useState} from "react";
+import React, {SyntheticEvent, useEffect, useMemo, useState} from "react";
 import {GlobeMethods} from "react-globe.gl";
-import {FormattedMessage} from "react-intl";
-import {LocaleContext} from "../i18n/LocaleContext";
+import {FormattedMessage} from "../context/FormattedMessage";
 import {Country, LanguageName} from "../lib/country";
-import {Locale} from "../lib/locale";
 import {answerName} from "../util/answer";
 import {findCentre, turnGlobe} from "../util/globe";
 import {DIRECTION_ARROWS} from "../util/distance";
@@ -53,9 +51,9 @@ export default function List({guesses, answerName, win, globeRef, practiceMode, 
     const [orderedGuesses, setOrderedGuesses] = useState(
         reorderGuesses(guesses, practiceMode)
     );
-    const {locale} = useContext(LocaleContext);
-    const langNameMap: Record<Locale, LanguageName> = {"en-CA": "NAME_EN"};
-    const langName = langNameMap[locale];
+
+    const locale = 'en-CA';
+    const langName = 'NAME_EN';
 
     useEffect(() => {
         setOrderedGuesses(reorderGuesses(guesses, practiceMode));

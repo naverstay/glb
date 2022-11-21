@@ -80,16 +80,10 @@ function calcProximity(points1: number[][], points2: number[][]) {
             distance = Math.min(distance, pointDistance);
         }
     }
-    // console.log("Country 1 points:", points1.length);
-    // console.log("Country 2 points:", points2.length);
-    // console.log("Total paths measured:", points1.length * points2.length);
-    // console.log("Proximity is:", distance);
     return distance;
 }
 
 export function polygonDistance(country1: Country, country2: Country) {
-    // console.log("Country 1:", country1.properties.NAME);
-    // console.log("Country 2", country2.properties.NAME);
     const name1 = country1.properties.NAME;
     const name2 = country2.properties.NAME;
     if (name1 === "South Africa" && name2 === "Lesotho") return 0;

@@ -3,11 +3,10 @@ import {Route, Routes, useSearchParams} from "react-router-dom";
 import Game from "./pages/Game";
 import Header from "./components/Header";
 import Help from "./pages/Help";
-// import Info from "./pages/Info";
 import Settings from "./pages/Settings";
 import Statistics from "./components/Statistics";
-import {ThemeContext} from "./context/ThemeContext";
 import Fade from "./transitions/Fade";
+import {ThemeContext} from "./context/ThemeContext";
 
 function App() {
     const [params] = useSearchParams();
@@ -70,8 +69,6 @@ function App() {
                                       showLoader={showLoader}
                                       setShowLoader={setShowLoader}
                                       setShowStats={setShowPopup}/>}/>
-
-                {/*<Route path="/info" element={<Info/>}/>*/}
             </Routes>
         </div>
     );

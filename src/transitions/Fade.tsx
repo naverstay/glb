@@ -6,7 +6,6 @@ type Props = {
     background?: string;
     delay?: string;
     closeCallback?: React.Dispatch<React.SetStateAction<string>>;
-    // preexist?: boolean;
 };
 
 export default function Fade({

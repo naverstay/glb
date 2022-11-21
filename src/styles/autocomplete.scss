@@ -70,8 +70,16 @@
       border-color: $autocomplete-border !important;
       color: $autocomplete-result-text !important;
 
+      input {
+        color: $text-main-color !important;
+      }
+
       li.selected {
         background-color: $autocomplete-hover-bg !important;
+      }
+
+      div.line {
+        border-top-color: $autocomplete-border !important;
       }
     }
 
