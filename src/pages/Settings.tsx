@@ -1,8 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {ThemeContext} from "../context/ThemeContext";
-import {LocaleContext} from "../i18n/LocaleContext";
 import localeList from "../i18n/messages";
-// import {FormattedMessage} from "react-intl";
 import {FormattedMessage} from "../context/FormattedMessage";
 import Toggle from "../components/Toggle";
 import {getPath} from "../util/svg";
@@ -19,7 +17,8 @@ export default function Settings({closeCallback, setMiles, miles, setPracticeMod
     const themeContext = useContext(ThemeContext);
     const [toggleTheme, setToggleTheme] = useState(themeContext.theme.nightMode);
     const [toggleHighContrast, setToggleHighContrast] = useState(themeContext.theme.highContrast);
-    const {locale} = useContext(LocaleContext);
+
+    const locale = 'en-CA';
 
     const {setTheme} = themeContext;
 

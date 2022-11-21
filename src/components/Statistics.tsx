@@ -1,4 +1,4 @@
-import {useContext, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import {useLocalStorage} from "../hooks/useLocalStorage";
 import {Stats} from "../lib/localStorage";
 import {isMobile} from "react-device-detect";

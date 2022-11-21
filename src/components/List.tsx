@@ -1,7 +1,7 @@
 import React, {SyntheticEvent, useEffect, useMemo, useState} from "react";
 import {GlobeMethods} from "react-globe.gl";
 import {FormattedMessage} from "../context/FormattedMessage";
-import {Country, LanguageName} from "../lib/country";
+import {Country} from "../lib/country";
 import {answerName} from "../util/answer";
 import {findCentre, turnGlobe} from "../util/globe";
 import {DIRECTION_ARROWS} from "../util/distance";
