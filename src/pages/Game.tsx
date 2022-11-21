@@ -260,10 +260,6 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
                         }
                     </div>
                 )}
-
-                <p>
-                    answerCountry: {answerCountry.properties.NAME}
-                </p>
             </div>
         </Suspense>
     );
