@@ -31,6 +31,7 @@ function reorderGuesses(guessList: Country[], practiceMode: boolean) {
                 } else if (b.properties.NAME === answerName) {
                     return 1;
                 } else {
+                    console.log('answerCountry', answerName, a.properties.NAME, b.properties.NAME);
                     return a.proximity - b.proximity;
                 }
             }
@@ -52,10 +53,8 @@ export default function List({guesses, answerName, win, globeRef, practiceMode, 
         reorderGuesses(guesses, practiceMode)
     );
 
-    const locale = 'en-CA';
-    const langName = 'NAME_EN';
-
     useEffect(() => {
+        console.log('setOrderedGuesses', guesses, practiceMode);
         setOrderedGuesses(reorderGuesses(guesses, practiceMode));
     }, [guesses, practiceMode]);
 
@@ -113,9 +112,6 @@ export default function List({guesses, answerName, win, globeRef, practiceMode, 
                     const {NAME_LEN, ABBREV, NAME, FLAG} = guess.properties;
                     const flag = (FLAG || "").toLocaleLowerCase();
                     let name = NAME_LEN >= 10 ? ABBREV : NAME;
-                    if (locale !== "en-CA") {
-                        name = guess.properties[langName];
-                    }
 
                     return (
                         <li key={idx}
@@ -123,24 +119,23 @@ export default function List({guesses, answerName, win, globeRef, practiceMode, 
                             <div className="suggestion-list__name"
                                  onClick={(e) => turnToCountry(e, idx)}>
                                 <div className="suggestion-list__flag">
-                                    <img
-                                        src={`https://flagcdn.com/w40/${flag.toLowerCase()}.png`}
-                                        alt={name}
-                                    />
+                                    <img src={`https://flagcdn.com/w40/${flag.toLowerCase()}.png`} alt={name}/>
                                 </div>
                                 <span>{name}</span>
                             </div>
                             <div className="suggestion-list__data">{isSortedByDistance ?
                                 win && idx === 0 ?
-                                    <FormattedMessage
-                                        id={"Settings14"}
-                                    />
-                                    : <>{formatKm(guess?.proximity, miles)}
-                                        <FormattedMessage id={miles ? "Settings13" : "Settings12"}/></>
+                                    <FormattedMessage id={"Settings14"}/>
+                                    :
+                                    <>
+                                        {formatKm(guess?.proximity, miles)}
+                                        <FormattedMessage id={miles ? "Settings13" : "Settings12"}/>
+                                    </>
 
                                 : (win && idx === 0) ?
                                     <FormattedMessage id={"Settings14"}/>
-                                    : (guessesToDisplay.length - idx)}</div>
+                                    : (guessesToDisplay.length - idx)}
+                            </div>
                             <div
                                 className="suggestion-list__direction">{win && idx === 0 ? <>🏆</> : DIRECTION_ARROWS[direction]}</div>
                         </li>

@@ -54,8 +54,6 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
     // const navigate = useNavigate();
 
     function enterPracticeMode(force?: boolean) {
-        console.log('enterPracticeMode', practiceStoredGuesses);
-
         if (!force && practiceStoredGuesses?.day === '' && practiceStoredGuesses?.countries?.length) {
             const loadCountries: Country[] = countryData.filter(m => practiceStoredGuesses.countries.indexOf(m.properties.NAME) > -1)
 
@@ -89,6 +87,7 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
 
     const storedCountries = useMemo(() => {
         const list = practiceMode ? practiceStoredGuesses : (today === storedGuesses.day ? storedGuesses : null);
+        const targetCountry = practiceMode ? JSON.parse(localStorage.getItem("practice") as string) as Country : answerCountry;
 
         if (list === null) {
             return []
@@ -102,8 +101,8 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
             if (!foundCountry) {
                 throw new Error("Country mapping broken");
             }
-            foundCountry["proximity"] = polygonDistance(foundCountry, answerCountry);
-            foundCountry["direction"] = polygonDirection(foundCountry, answerCountry);
+            foundCountry["proximity"] = polygonDistance(foundCountry, targetCountry);
+            foundCountry["direction"] = polygonDirection(foundCountry, targetCountry);
             return foundCountry;
         });
 

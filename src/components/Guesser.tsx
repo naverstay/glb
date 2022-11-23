@@ -51,8 +51,6 @@ export default function Guesser({
     const locale = 'en-CA';
     const langName = 'NAME_EN';
 
-    console.log('locale', locale, langName);
-
     const guessInputRef = useRef<HTMLInputElement>(null);
     const guessHolderRef = useRef<HTMLInputElement>(null);
     const aotocompleteRef = useRef(null);
