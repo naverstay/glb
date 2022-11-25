@@ -31,11 +31,6 @@ function App() {
         if (showLoader) setTimeout(() => setShowLoader(false), 1);
     }, [showLoader]);
 
-    // Re-render globe
-    useEffect(() => {
-        console.log('history', params);
-    }, [params]);
-
     // change theme
     useEffect(() => {
         document.documentElement.classList.toggle("dark", themeContext.theme.nightMode);
