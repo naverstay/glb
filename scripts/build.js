@@ -49,9 +49,18 @@ const writeStatsJson = argv.indexOf('--stats') !== -1;
 // Generate configuration
 const config = configFactory('production');
 
+if (process.env.PUBLIC_URL) {
+  let plugins = config?.plugins ?? []
+
+  config.plugins = plugins.concat(
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1
+    }));
+}
+
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
-const { checkBrowsers } = require('react-dev-utils/browsersHelper');
+const {checkBrowsers} = require('react-dev-utils/browsersHelper');
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // First, read the current file sizes in build directory.
@@ -68,19 +77,19 @@ checkBrowsers(paths.appPath, isInteractive)
     return build(previousFileSizes);
   })
   .then(
-    ({ stats, previousFileSizes, warnings }) => {
+    ({stats, previousFileSizes, warnings}) => {
       if (warnings.length) {
         console.log(chalk.yellow('Compiled with warnings.\n'));
         console.log(warnings.join('\n\n'));
         console.log(
           '\nSearch for the ' +
-            chalk.underline(chalk.yellow('keywords')) +
-            ' to learn more about each warning.'
+          chalk.underline(chalk.yellow('keywords')) +
+          ' to learn more about each warning.'
         );
         console.log(
           'To ignore, add ' +
-            chalk.cyan('// eslint-disable-next-line') +
-            ' to the line before.\n'
+          chalk.cyan('// eslint-disable-next-line') +
+          ' to the line before.\n'
         );
       } else {
         console.log(chalk.green('Compiled successfully.\n'));
@@ -155,11 +164,11 @@ function build(previousFileSizes) {
 
         messages = formatWebpackMessages({
           errors: [errMessage],
-          warnings: [],
+          warnings: []
         });
       } else {
         messages = formatWebpackMessages(
-          stats.toJson({ all: false, warnings: true, errors: true })
+          stats.toJson({all: false, warnings: true, errors: true})
         );
       }
       if (messages.errors.length) {
@@ -184,7 +193,7 @@ function build(previousFileSizes) {
           console.log(
             chalk.yellow(
               '\nTreating warnings as errors because process.env.CI = true.\n' +
-                'Most CI servers set it automatically.\n'
+              'Most CI servers set it automatically.\n'
             )
           );
           return reject(new Error(filteredWarnings.join('\n\n')));
@@ -194,7 +203,7 @@ function build(previousFileSizes) {
       const resolveArgs = {
         stats,
         previousFileSizes,
-        warnings: messages.warnings,
+        warnings: messages.warnings
       };
 
       if (writeStatsJson) {
@@ -212,6 +221,6 @@ function build(previousFileSizes) {
 function copyPublicFolder() {
   fs.copySync(paths.appPublic, paths.appBuild, {
     dereference: true,
-    filter: file => file !== paths.appHtml,
+    filter: file => file !== paths.appHtml
   });
 }

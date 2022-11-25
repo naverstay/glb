@@ -143,7 +143,7 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
         if (controls != null) controls.zoomSpeed = ZOOM_SPEED;
     }
 
-    console.log('###RENDER### Globe');
+    console.log('###RENDER### Globe', process.env.PUBLIC_URL, window?.globeImageUrl);
 
     return (
         <div>
@@ -156,7 +156,7 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
                     className="globe-react "
                     style={{"-webkit-tap-highlight-color": "transparent"}}
                     ref={globeRef}
-                    globeImageUrl={globeImg(nightMode)}
+                    globeImageUrl={(window?.globeImageUrl as string) || process.env.PUBLIC_URL + globeImg(nightMode)}
                     width={size}
                     height={size}
                     backgroundColor="#00000000"
