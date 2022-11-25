@@ -138,8 +138,6 @@ export default function Guesser({
             setWin(true);
         }
 
-        // console.log('runChecks', trimmedName, practiceMode, answerCountry);
-
         return guessCountry;
     }
 
@@ -149,8 +147,6 @@ export default function Guesser({
         setGuessFlag("");
         setAutoCompleteIndex(autoCompleteIndex + 1);
         let guessCountry = runChecks();
-
-        // console.log('answerCountry', guessName, guessCountry, answerCountry);
 
         if (practiceMode) {
             const answerCountry = JSON.parse(

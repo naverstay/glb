@@ -1,5 +1,5 @@
-import {useNavigate} from "react-router-dom";
 import {getPath} from "../util/svg";
+import {setQueryStringParameter} from "../hooks/useLocalStorage";
 
 type Props = {
     practiceMode: boolean;
@@ -9,16 +9,13 @@ type Props = {
 };
 
 export default function Header({setShowLoader, setShowPopup, practiceMode, setPracticeMode}: Props) {
-    const navigate = useNavigate();
-
     // Set up practice mode
 
     function reRenderGlobe() {
         setShowLoader(true);
-        if (practiceMode) {
-            return navigate("/?practice_mode=true");
-        }
-        navigate("/");
+        setQueryStringParameter('practice_mode', practiceMode ? "true" : "");
+
+        // window.location.search = practiceMode ? "/?practice_mode=true" : "/"
     }
 
     console.log('###RENDER### header');

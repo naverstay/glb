@@ -54,7 +54,6 @@ export default function List({guesses, answerName, win, globeRef, practiceMode, 
     );
 
     useEffect(() => {
-        console.log('setOrderedGuesses', guesses, practiceMode);
         setOrderedGuesses(reorderGuesses(guesses, practiceMode));
     }, [guesses, practiceMode]);
 

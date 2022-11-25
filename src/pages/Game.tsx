@@ -2,13 +2,12 @@ import React, {lazy, Suspense, useEffect, useMemo, useRef, useState} from "react
 import {GlobeMethods} from "react-globe.gl";
 import {Country} from "../lib/country";
 import {answerCountry, answerName} from "../util/answer";
-import {useLocalStorage} from "../hooks/useLocalStorage";
+import {setQueryStringParameter, useLocalStorage} from "../hooks/useLocalStorage";
 import {Guesses, Stats} from "../lib/localStorage";
 import {dateDiffInDays, today} from "../util/dates";
 import {polygonDirection, polygonDistance} from "../util/distance";
 import {getColourEmoji} from "../util/colour";
 import {FormattedMessage} from "../context/FormattedMessage";
-import {useNavigate} from "react-router-dom";
 
 const Globe = lazy(() => import("../components/Globe"));
 const Guesser = lazy(() => import("../components/Guesser"));
@@ -25,7 +24,7 @@ type Props = {
 };
 
 export default function Game({showLoader, setShowLoader, setShowStats, practiceMode, setMiles, miles}: Props) {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     // Get data from local storage
     const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>("guesses", {
@@ -50,9 +49,6 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
 
     const [storedStats, storeStats] = useLocalStorage<Stats>("statistics", firstStats);
 
-    // Set up practice mode
-    // const navigate = useNavigate();
-
     function enterPracticeMode(force?: boolean) {
         if (!force && practiceStoredGuesses?.day === '' && practiceStoredGuesses?.countries?.length) {
             const loadCountries: Country[] = countryData.filter(m => practiceStoredGuesses.countries.indexOf(m.properties.NAME) > -1)
@@ -64,7 +60,7 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
                 countryData[Math.floor(Math.random() * countryData.length)];
 
             localStorage.setItem("practice", JSON.stringify(practiceAnswer));
-            // navigate("/game?practice_mode=true");
+
             setGuesses([]);
             setWin(false);
         }
@@ -74,16 +70,18 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
     useEffect(() => {
         if (practiceMode) {
             enterPracticeMode();
-            navigate("/?practice_mode=true")
+            setQueryStringParameter('practice_mode',  "true");
+            // window.location.search = "/?practice_mode=true"
         } else {
-            navigate("/")
+            // window.location.search = "/"
+            setQueryStringParameter('practice_mode',  "");
         }
 
         if (showLoader) setTimeout(() => {
             setShowLoader(false);
         }, 1);
         // eslint-disable-next-line
-    }, [practiceMode, navigate, showLoader, setShowLoader]);
+    }, [practiceMode, showLoader, setShowLoader]);
 
     const storedCountries = useMemo(() => {
         const list = practiceMode ? practiceStoredGuesses : (today === storedGuesses.day ? storedGuesses : null);

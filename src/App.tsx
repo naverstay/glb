@@ -1,5 +1,4 @@
 import {useContext, useEffect, useState} from "react";
-import {Route, Routes, useSearchParams} from "react-router-dom";
 import Game from "./pages/Game";
 import Header from "./components/Header";
 import Help from "./pages/Help";
@@ -9,7 +8,13 @@ import Fade from "./transitions/Fade";
 import {ThemeContext} from "./context/ThemeContext";
 
 function App() {
-    const [params] = useSearchParams();
+    const [params, setParams] = useState((new URL(document.location as unknown as string)).searchParams);
+
+    window.onpopstate = window.history.pushState = function (e) {
+        if (params !== (new URL(document.location as unknown as string)).searchParams) {
+            setParams((new URL(document.location as unknown as string)).searchParams)
+        }
+    };
 
     // State
     const [showLoader, setShowLoader] = useState(false);
@@ -25,6 +30,11 @@ function App() {
     useEffect(() => {
         if (showLoader) setTimeout(() => setShowLoader(false), 1);
     }, [showLoader]);
+
+    // Re-render globe
+    useEffect(() => {
+        console.log('history', params);
+    }, [params]);
 
     // change theme
     useEffect(() => {
@@ -61,15 +71,12 @@ function App() {
                 </div>
             </Fade>
 
-            <Routes>
-                <Route path="/"
-                       element={<Game setMiles={setMiles}
-                                      miles={miles}
-                                      practiceMode={practiceMode}
-                                      showLoader={showLoader}
-                                      setShowLoader={setShowLoader}
-                                      setShowStats={setShowPopup}/>}/>
-            </Routes>
+            <Game setMiles={setMiles}
+                  miles={miles}
+                  practiceMode={practiceMode}
+                  showLoader={showLoader}
+                  setShowLoader={setShowLoader}
+                  setShowStats={setShowPopup}/>
         </div>
     );
 }

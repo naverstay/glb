@@ -36,3 +36,15 @@ export function useLocalStorage<T extends IStorage>(
 
     return [value, setValue];
 }
+
+export function setQueryStringParameter(name: string, value: string) {
+    const params = new URLSearchParams(window.location.search);
+
+    if (!value) {
+        params.delete(name)
+    } else {
+        params.set(name, value);
+    }
+
+    window.history.replaceState({}, '', decodeURIComponent(`${window.location.pathname}${params ? '?' + params : ''}`));
+}

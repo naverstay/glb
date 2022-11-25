@@ -21,8 +21,6 @@ export default function Switch({name, toggle, setToggle, on, off, top, bottom, c
         }
     }
 
-    console.log('###RENDER### Toggle', typeof setToggle);
-
     return (
         <div className="toggle-holder">
             <div className="toggle-wrapper">
