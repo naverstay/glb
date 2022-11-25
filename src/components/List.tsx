@@ -57,7 +57,7 @@ export default function List({guesses, answerName, win, globeRef, practiceMode, 
         setOrderedGuesses(reorderGuesses(guesses, practiceMode));
     }, [guesses, practiceMode]);
 
-    function formatKm(m: number, miles: boolean) {
+    function formatProximity(m: number, miles: boolean) {
         const METERS_PER_MILE = 1609.34;
         const BIN = 10;
         const value = miles ? m / METERS_PER_MILE : m / 1000;
@@ -127,7 +127,7 @@ export default function List({guesses, answerName, win, globeRef, practiceMode, 
                                     <FormattedMessage id={"Settings14"}/>
                                     :
                                     <>
-                                        {formatKm(guess?.proximity, miles)}
+                                        {formatProximity(guess?.proximity, miles)}
                                         <FormattedMessage id={miles ? "Settings13" : "Settings12"}/>
                                     </>
 

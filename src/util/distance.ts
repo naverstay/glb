@@ -94,7 +94,7 @@ export function polygonDistance(country1: Country, country2: Country) {
     if (name1 === "San Marino" && name2 === "Italy") return 0;
     const points1 = polygonPoints(country1);
     const points2 = polygonPoints(country2);
-    return calcProximity(points1, points2);
+    return name1 === name2 ? 0 : calcProximity(points1, points2);
 }
 
 export function polygonDirection(country1: Country, country2: Country): Direction {

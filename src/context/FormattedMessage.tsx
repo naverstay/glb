@@ -1,3 +1,4 @@
+import React from "react";
 import {English} from "../i18n/messages/en-CA";
 
 type FormattedMessageProps = {
@@ -8,7 +9,7 @@ type FormattedMessageProps = {
 export const FormattedMessage = ({id, values}: FormattedMessageProps) => {
     let ret = '';
     let done: string[] = [];
-    let retElement: (string | JSX.Element)[] = [];
+    let retElement: (string | JSX.Element | typeof React.Fragment)[] = [];
 
     const rx = /{.+}/ig;
 
@@ -29,14 +30,14 @@ export const FormattedMessage = ({id, values}: FormattedMessageProps) => {
                 if (split?.length) {
                     for (let i = 0; i < split.length; i++) {
                         const splitElement = split[i];
-                        retElement.push(splitElement);
+                        retElement.push(<React.Fragment key={i}>{splitElement}</React.Fragment>);
 
                         Object.keys(values).forEach((k, ki) => {
                             const key = k.replace(/{}/g, '')
                             if (ret.indexOf(splitElement) > -1 && done.indexOf(key) === -1) {
                                 done.push(key);
                                 // @ts-ignore
-                                retElement.push(values[key]);
+                                retElement.push(<React.Fragment key={i + '_' + ki}>{values[key]}</React.Fragment>);
                             }
                         })
                     }

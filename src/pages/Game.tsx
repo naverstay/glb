@@ -24,8 +24,6 @@ type Props = {
 };
 
 export default function Game({showLoader, setShowLoader, setShowStats, practiceMode, setMiles, miles}: Props) {
-    // const navigate = useNavigate();
-
     // Get data from local storage
     const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>("guesses", {
         day: today,
@@ -70,11 +68,9 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
     useEffect(() => {
         if (practiceMode) {
             enterPracticeMode();
-            setQueryStringParameter('practice_mode',  "true");
-            // window.location.search = "/?practice_mode=true"
+            setQueryStringParameter('practice_mode', "true");
         } else {
-            // window.location.search = "/"
-            setQueryStringParameter('practice_mode',  "");
+            setQueryStringParameter('practice_mode', "");
         }
 
         if (showLoader) setTimeout(() => {
@@ -125,14 +121,14 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
         if (!practiceMode) {
             setGuesses(storedCountries);
         }
-    }, [practiceMode, setGuesses, storedCountries]);
+    }, [practiceMode, storedCountries]);
 
 
     useEffect(() => {
         if (!practiceMode) {
-            setWin(alreadyWon);
+            setWin(alreadyWon || guesses.map((c) => c.properties.NAME).includes(answerName));
         }
-    }, [alreadyWon, practiceMode]);
+    }, [alreadyWon, practiceMode, guesses]);
 
     // Whenever there's a new guess
     useEffect(() => {
@@ -159,7 +155,7 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
 
     // When the player wins!
     useEffect(() => {
-        if (win && storedStats.lastWin !== today && !practiceMode) {
+        if (win && (!storedStats?.lastWin || storedStats.lastWin !== today) && !practiceMode) {
             // Store new stats in local storage
             const gamesPlayed = (storedStats.gamesPlayed || 0) + 1;
             const lastWin = today;
@@ -176,11 +172,7 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
                 chunks.push(guesses.slice(i, i + 8));
             }
             const emojiGuesses = chunks
-                .map((each) =>
-                    each
-                        .map((guess) => getColourEmoji(guess, guesses[guesses.length - 1]))
-                        .join("")
-                )
+                .map((each) => each.map((guess) => getColourEmoji(guess, guesses[guesses.length - 1])).join(""))
                 .join("\n");
             const newStats = {
                 gamesPlayed,
