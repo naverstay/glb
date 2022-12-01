@@ -36,7 +36,7 @@ export const ThemeContext =
 
 export const ThemeProvider = ({ children }: ProviderProps) => {
   const [storedTheme, storeTheme] = useLocalStorage<Theme>(
-    "theme",
+    "worldleTheme",
     initialTheme
   );
 

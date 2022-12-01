@@ -15,7 +15,7 @@ export function Message({win, error, guesses, practiceMode}: Props) {
 
     if (practiceMode) {
         const answerCountry = JSON.parse(
-            localStorage.getItem("practice") as string
+            localStorage.getItem("worldlePractice") as string
         ) as Country;
         name = answerCountry?.properties.NAME;
     }

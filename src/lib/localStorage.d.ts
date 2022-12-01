@@ -1,11 +1,11 @@
 export type Stats = {
-  gamesPlayed: number;
-  gamesWon: number;
-  lastWin: string;
-  currentStreak: number;
-  maxStreak: number;
-  usedGuesses: number[];
-  emojiGuesses: string;
+  worldleGamesPlayed: number;
+  worldleGamesWon: number;
+  worldleLastWin: string;
+  worldleCurrentStreak: number;
+  worldleMaxStreak: number;
+  worldleUsedGuesses: number[];
+  worldleEmojiGuesses: string;
 };
 
 export type Guesses = {

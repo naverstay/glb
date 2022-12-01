@@ -1,16 +1,13 @@
-import React, {SyntheticEvent, useEffect, useMemo, useState} from "react";
-import {GlobeMethods} from "react-globe.gl";
+import React, {useEffect, useMemo, useState} from "react";
 import {FormattedMessage} from "../context/FormattedMessage";
 import {Country} from "../lib/country";
 import {answerName} from "../util/answer";
-import {findCentre, turnGlobe} from "../util/globe";
 import {DIRECTION_ARROWS} from "../util/distance";
 
 type Props = {
     guesses: Country[];
     answerName: string;
     win: boolean;
-    globeRef: React.MutableRefObject<GlobeMethods>;
     setMiles: React.Dispatch<React.SetStateAction<boolean>>;
     miles: boolean;
     practiceMode: boolean;
@@ -21,7 +18,7 @@ function reorderGuesses(guessList: Country[], practiceMode: boolean) {
         // practice
         if (practiceMode) {
             const answerCountry = JSON.parse(
-                localStorage.getItem("practice") as string
+                localStorage.getItem("worldlePractice") as string
             ) as Country;
 
             if (answerCountry) {
@@ -48,7 +45,7 @@ function reorderGuesses(guessList: Country[], practiceMode: boolean) {
     });
 }
 
-export default function List({guesses, answerName, win, globeRef, practiceMode, setMiles, miles}: Props) {
+export default function List({guesses, answerName, win, practiceMode, setMiles, miles}: Props) {
     const [orderedGuesses, setOrderedGuesses] = useState(
         reorderGuesses(guesses, practiceMode)
     );
@@ -71,14 +68,6 @@ export default function List({guesses, answerName, win, globeRef, practiceMode, 
         return `~ ${format(rounded)}`;
     }
 
-    function turnToCountry(e: SyntheticEvent, idx: number) {
-        const clickedCountry = isSortedByDistance
-            ? orderedGuesses[idx]
-            : guesses[idx];
-        const {lat, lng, altitude} = findCentre(clickedCountry);
-        turnGlobe({lat, lng, altitude}, globeRef, "zoom");
-    }
-
     const closest = orderedGuesses[0];
     const farthest = orderedGuesses[orderedGuesses.length - 1];
 
@@ -90,6 +79,9 @@ export default function List({guesses, answerName, win, globeRef, practiceMode, 
 
     return (
         <div className="suggestion-holder">
+            <p>
+                {answerName}
+            </p>
             {closest && farthest && (
                 <div className="suggestion-block">
                     <button className={"btn btn-darkblue" + (isSortedByDistance ? ' __active' : '')}
@@ -115,8 +107,7 @@ export default function List({guesses, answerName, win, globeRef, practiceMode, 
                     return (
                         <li key={idx}
                             className={"suggestion-list__row" + (win && idx === 0 ? ' __bingo' : '')}>
-                            <div className="suggestion-list__name"
-                                 onClick={(e) => turnToCountry(e, idx)}>
+                            <div className="suggestion-list__name">
                                 <div className="suggestion-list__flag">
                                     <img src={`https://flagcdn.com/w40/${flag.toLowerCase()}.png`} alt={name}/>
                                 </div>

@@ -128,7 +128,7 @@ export default function Guesser({
         }
         if (practiceMode) {
             const answerCountry = JSON.parse(
-                localStorage.getItem("practice") as string
+                localStorage.getItem("worldlePractice") as string
             ) as Country;
             const answerName = answerCountry.properties.NAME_EN;
             if (guessCountry.properties.NAME_EN === answerName) {
@@ -150,7 +150,7 @@ export default function Guesser({
 
         if (practiceMode) {
             const answerCountry = JSON.parse(
-                localStorage.getItem("practice") as string
+                localStorage.getItem("worldlePractice") as string
             );
 
             if (guessCountry && answerCountry) {

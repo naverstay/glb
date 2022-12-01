@@ -18,48 +18,48 @@ export default function Statistics({closeCallback}: Props) {
 
     // Stats data
     const firstStats = {
-        gamesPlayed: 0,
-        gamesWon: 0,
-        lastWin: new Date(0).toLocaleDateString("en-CA"),
-        currentStreak: 0,
-        maxStreak: 0,
-        usedGuesses: [],
-        emojiGuesses: "",
+        worldleGamesPlayed: 0,
+        worldleGamesWon: 0,
+        worldleLastWin: new Date(0).toLocaleDateString("en-CA"),
+        worldleCurrentStreak: 0,
+        worldleMaxStreak: 0,
+        worldleUsedGuesses: [],
+        worldleEmojiGuesses: "",
     };
 
     const [storedStats, storeStats] = useLocalStorage<Stats>(
-        "statistics",
+        "worldleStatistics",
         firstStats
     );
     const {
-        // gamesPlayed,
-        gamesWon,
-        lastWin,
-        currentStreak,
-        maxStreak,
-        usedGuesses,
-        emojiGuesses,
+        // worldleGamesPlayed,
+        worldleGamesWon,
+        worldleLastWin,
+        worldleCurrentStreak,
+        worldleMaxStreak,
+        worldleUsedGuesses,
+        worldleEmojiGuesses,
     } = storedStats;
 
-    const sumGuesses = usedGuesses.reduce((a, b) => a + b, 0);
-    const avgGuesses = Math.round((sumGuesses / usedGuesses.length) * 100) / 100;
-    const showAvgGuesses = usedGuesses.length === 0 ? "--" : avgGuesses;
+    const sumGuesses = worldleUsedGuesses.reduce((a, b) => a + b, 0);
+    const avgGuesses = Math.round((sumGuesses / worldleUsedGuesses.length) * 100) / 100;
+    const showAvgGuesses = worldleUsedGuesses.length === 0 ? "--" : avgGuesses;
     const todaysGuesses =
-        lastWin === today ? usedGuesses[usedGuesses.length - 1] : "--";
+        worldleLastWin === today ? worldleUsedGuesses[worldleUsedGuesses.length - 1] : "--";
 
-    const showLastWin = lastWin >= "2022-01-01" ? lastWin : "--";
-    // const winPercent = gamesWon && gamesPlayed ? Math.ceil(100 * (gamesWon / gamesPlayed)) : "--";
+    const showworldleLastWin = worldleLastWin >= "2022-01-01" ? worldleLastWin : "--";
+    // const winPercent = worldleGamesWon && worldleGamesPlayed ? Math.ceil(100 * (worldleGamesWon / worldleGamesPlayed)) : "--";
 
     const avgShorthand = isMobile
         ? localeList[locale]["Stats7"]
         : localeList[locale]["Stats6"];
 
     const statsTable = [
-        {label: localeList[locale]["Stats1"], value: showLastWin},
+        {label: localeList[locale]["Stats1"], value: showworldleLastWin},
         {label: localeList[locale]["Stats2"], value: todaysGuesses},
-        {label: localeList[locale]["Stats3"], value: gamesWon},
-        {label: localeList[locale]["Stats4"], value: currentStreak},
-        {label: localeList[locale]["Stats5"], value: maxStreak},
+        {label: localeList[locale]["Stats3"], value: worldleGamesWon},
+        {label: localeList[locale]["Stats4"], value: worldleCurrentStreak},
+        {label: localeList[locale]["Stats5"], value: worldleMaxStreak},
         {label: avgShorthand, value: showAvgGuesses},
     ];
 
@@ -99,8 +99,8 @@ export default function Statistics({closeCallback}: Props) {
 
     async function copyToClipboard() {
         const shareString = `🌎 ${date} 🌍
-🔥 ${currentStreak} | ${localeList[locale]["Stats7"]}: ${showAvgGuesses}
-${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
+🔥 ${worldleCurrentStreak} | ${localeList[locale]["Stats7"]}: ${showAvgGuesses}
+${worldleLastWin === today ? worldleEmojiGuesses : "--"} = ${todaysGuesses}
 
 #globle`;
 

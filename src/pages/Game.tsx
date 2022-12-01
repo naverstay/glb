@@ -1,5 +1,4 @@
-import React, {lazy, Suspense, useEffect, useMemo, useRef, useState} from "react";
-import {GlobeMethods} from "react-globe.gl";
+import React, {lazy, Suspense, useContext, useEffect, useMemo, useState} from "react";
 import {Country} from "../lib/country";
 import {answerCountry, answerName} from "../util/answer";
 import {setQueryStringParameter, useLocalStorage} from "../hooks/useLocalStorage";
@@ -8,8 +7,8 @@ import {dateDiffInDays, today} from "../util/dates";
 import {polygonDirection, polygonDistance} from "../util/distance";
 import {getColourEmoji} from "../util/colour";
 import {FormattedMessage} from "../context/FormattedMessage";
+import {ThemeContext} from "../context/ThemeContext";
 
-const Globe = lazy(() => import("../components/Globe"));
 const Guesser = lazy(() => import("../components/Guesser"));
 const List = lazy(() => import("../components/List"));
 const countryData: Country[] = require("../data/country_data.json").features;
@@ -24,28 +23,31 @@ type Props = {
 };
 
 export default function Game({showLoader, setShowLoader, setShowStats, practiceMode, setMiles, miles}: Props) {
+    // Theme
+    const {nightMode = false, prideMode = false, highContrast = false} = useContext(ThemeContext).theme;
+
     // Get data from local storage
-    const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>("guesses", {
+    const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>("worldleGuesses", {
         day: today,
         countries: [],
     });
 
-    const [practiceStoredGuesses, practiceStoreGuesses] = useLocalStorage<Guesses>("practiceGuesses", {
+    const [practiceStoredGuesses, practiceStoreGuesses] = useLocalStorage<Guesses>("worldlePracticeGuesses", {
         day: '',
         countries: [],
     });
 
     const firstStats = {
-        gamesPlayed: 0,
-        gamesWon: 0,
-        lastWin: new Date(0).toLocaleDateString("en-CA"),
-        currentStreak: 0,
-        maxStreak: 0,
-        usedGuesses: [],
-        emojiGuesses: "",
+        worldleGamesPlayed: 0,
+        worldleGamesWon: 0,
+        worldleLastWin: new Date(0).toLocaleDateString("en-CA"),
+        worldleCurrentStreak: 0,
+        worldleMaxStreak: 0,
+        worldleUsedGuesses: [],
+        worldleEmojiGuesses: "",
     };
 
-    const [storedStats, storeStats] = useLocalStorage<Stats>("statistics", firstStats);
+    const [storedStats, storeStats] = useLocalStorage<Stats>("worldleStatistics", firstStats);
 
     function enterPracticeMode(force?: boolean) {
         if (!force && practiceStoredGuesses?.day === '' && practiceStoredGuesses?.countries?.length) {
@@ -57,8 +59,9 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
             const practiceAnswer =
                 countryData[Math.floor(Math.random() * countryData.length)];
 
-            localStorage.setItem("practice", JSON.stringify(practiceAnswer));
+            localStorage.setItem("worldlePractice", JSON.stringify(practiceAnswer));
 
+            setCurrentImg(practiceAnswer.properties.FLAG.toLowerCase());
             setGuesses([]);
             setWin(false);
         }
@@ -81,7 +84,7 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
 
     const storedCountries = useMemo(() => {
         const list = practiceMode ? practiceStoredGuesses : (today === storedGuesses.day ? storedGuesses : null);
-        const targetCountry = practiceMode ? JSON.parse(localStorage.getItem("practice") as string) as Country : answerCountry;
+        const targetCountry = practiceMode ? JSON.parse(localStorage.getItem("worldlePractice") as string) as Country : answerCountry;
 
         if (list === null) {
             return []
@@ -114,7 +117,19 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
     // already know from the stored info.
     const [guesses, setGuesses] = useState<Country[]>(storedCountries);
     const [win, setWin] = useState(alreadyWon);
-    const globeRef = useRef<GlobeMethods>(null!);
+    const [currentImg, setCurrentImg] = useState('');
+
+    useEffect(() => {
+        if (practiceMode) {
+            const answerCountry = JSON.parse(
+                localStorage.getItem("worldlePractice") as string
+            );
+
+            setCurrentImg(answerCountry.properties.FLAG.toLowerCase())
+        } else {
+            setCurrentImg(answerCountry.properties.FLAG.toLowerCase())
+        }
+    }, [practiceMode, answerCountry]);
 
     // Whenever there's a new guess
     useEffect(() => {
@@ -122,7 +137,6 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
             setGuesses(storedCountries);
         }
     }, [practiceMode, storedCountries]);
-
 
     useEffect(() => {
         if (!practiceMode) {
@@ -155,33 +169,33 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
 
     // When the player wins!
     useEffect(() => {
-        if (win && (!storedStats?.lastWin || storedStats.lastWin !== today) && !practiceMode) {
+        if (win && (!storedStats?.worldleLastWin || storedStats.worldleLastWin !== today) && !practiceMode) {
             // Store new stats in local storage
-            const gamesPlayed = (storedStats.gamesPlayed || 0) + 1;
-            const lastWin = today;
-            const gamesWon = storedStats.gamesWon + 1;
-            const streakBroken = dateDiffInDays(storedStats.lastWin, lastWin) > 1;
-            const currentStreak = streakBroken ? 1 : storedStats.currentStreak + 1;
-            const maxStreak =
-                currentStreak > storedStats.maxStreak
-                    ? currentStreak
-                    : storedStats.maxStreak;
-            const usedGuesses = [...storedStats.usedGuesses, guesses.length];
+            const worldleGamesPlayed = (storedStats.worldleGamesPlayed || 0) + 1;
+            const worldleLastWin = today;
+            const worldleGamesWon = storedStats.worldleGamesWon + 1;
+            const streakBroken = dateDiffInDays(storedStats.worldleLastWin, worldleLastWin) > 1;
+            const worldleCurrentStreak = streakBroken ? 1 : storedStats.worldleCurrentStreak + 1;
+            const worldleMaxStreak =
+                worldleCurrentStreak > storedStats.worldleMaxStreak
+                    ? worldleCurrentStreak
+                    : storedStats.worldleMaxStreak;
+            const worldleUsedGuesses = [...storedStats.worldleUsedGuesses, guesses.length];
             const chunks = [];
             for (let i = 0; i < guesses.length; i += 8) {
                 chunks.push(guesses.slice(i, i + 8));
             }
-            const emojiGuesses = chunks
+            const worldleEmojiGuesses = chunks
                 .map((each) => each.map((guess) => getColourEmoji(guess, guesses[guesses.length - 1])).join(""))
                 .join("\n");
             const newStats = {
-                gamesPlayed,
-                lastWin,
-                gamesWon,
-                currentStreak,
-                maxStreak,
-                usedGuesses,
-                emojiGuesses,
+                worldleGamesPlayed,
+                worldleLastWin,
+                worldleGamesWon,
+                worldleCurrentStreak,
+                worldleMaxStreak,
+                worldleUsedGuesses,
+                worldleEmojiGuesses,
             };
             storeStats(newStats);
 
@@ -222,18 +236,17 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
 
                 {!showLoader && (
                     <div className="globe-holder">
-                        <Globe
-                            guesses={guesses}
-                            globeRef={globeRef}
-                            practiceMode={practiceMode}
-                        />
+                        <div className="globe-holder__image">
+                            <img alt="country to guess"
+                                 src={`images/countries/${currentImg}/vector.svg`}/>
+                        </div>
+
                         <List
                             answerName={answerName}
                             setMiles={setMiles}
                             miles={miles}
                             guesses={guesses}
                             win={win}
-                            globeRef={globeRef}
                             practiceMode={practiceMode}
                         />
 

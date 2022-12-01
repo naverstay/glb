@@ -79,7 +79,7 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
     function polygonColour(country: Country) {
         if (practiceMode) {
             const answerCountry = JSON.parse(
-                localStorage.getItem("practice") as string
+                localStorage.getItem("worldlePractice") as string
             );
             return getColour(
                 country,
