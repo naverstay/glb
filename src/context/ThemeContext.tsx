@@ -10,7 +10,6 @@ type ProviderProps = {
 
 type Theme = {
   nightMode: boolean;
-  highContrast: boolean;
   prideMode?: boolean;
   milesMode?: boolean;
 };
@@ -22,7 +21,6 @@ type ThemeContextType = {
 
 const initialTheme: Theme = {
   nightMode: false,
-  highContrast: false,
   milesMode: false,
 };
 

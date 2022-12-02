@@ -16,7 +16,6 @@ type Props = {
 export default function Settings({closeCallback, setMiles, miles, setPracticeMode, practiceMode}: Props) {
     const themeContext = useContext(ThemeContext);
     const [toggleTheme, setToggleTheme] = useState(themeContext.theme.nightMode);
-    const [toggleHighContrast, setToggleHighContrast] = useState(themeContext.theme.highContrast);
 
     const locale = 'en-CA';
 
@@ -26,11 +25,10 @@ export default function Settings({closeCallback, setMiles, miles, setPracticeMod
         if (setTheme) {
             setTheme({
                 nightMode: toggleTheme,
-                highContrast: toggleHighContrast,
                 milesMode: miles,
             });
         }
-    }, [toggleTheme, toggleHighContrast, setTheme, miles]);
+    }, [toggleTheme, setTheme, miles]);
 
     const options = [
         {
