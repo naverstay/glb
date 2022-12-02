@@ -50,7 +50,7 @@ function pointToCoordinates(point: Array<number>) {
     return new geometry.LatLng(lat, lng);
 }
 
-function polygonPoints(country: Country) {
+export function polygonPoints(country: Country) {
     const {geometry} = country;
     switch (geometry.type) {
         case "Polygon":

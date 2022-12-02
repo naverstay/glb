@@ -120,15 +120,16 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
     const [currentImg, setCurrentImg] = useState('');
 
     useEffect(() => {
+        let country = answerCountry;
+
         if (practiceMode) {
-            const answerCountry = JSON.parse(
+            country = JSON.parse(
                 localStorage.getItem("worldlePractice") as string
             );
-
-            setCurrentImg(answerCountry.properties.FLAG.toLowerCase())
-        } else {
-            setCurrentImg(answerCountry.properties.FLAG.toLowerCase())
         }
+
+        setCurrentImg(country.properties.FLAG.toLowerCase());
+
     }, [practiceMode, answerCountry]);
 
     // Whenever there's a new guess
@@ -237,8 +238,8 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
                 {!showLoader && (
                     <div className="globe-holder">
                         <div className="globe-holder__image">
-                            <img alt="country to guess"
-                                 src={`images/countries/${currentImg}/vector.svg`}/>
+                            {currentImg ? <img alt="country to guess" className={win ? '__win' : ''}
+                                               src={`images/countries/${currentImg}/vector.svg`}/> : null}
                         </div>
 
                         <List

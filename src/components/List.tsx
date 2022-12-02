@@ -79,9 +79,6 @@ export default function List({guesses, answerName, win, practiceMode, setMiles, 
 
     return (
         <div className="suggestion-holder">
-            <p>
-                {answerName}
-            </p>
             {closest && farthest && (
                 <div className="suggestion-block">
                     <button className={"btn btn-darkblue" + (isSortedByDistance ? ' __active' : '')}

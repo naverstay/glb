@@ -25,7 +25,7 @@ export default function Header({setShowLoader, setShowPopup, practiceMode, setPr
             <div className="container">
                 <div className="header-cell">
                      <span className="logo" onClick={reRenderGlobe}
-                     >GLOBLE</span>
+                     >WORLDLE</span>
                 </div>
 
                 <div className="header-cell">

@@ -41,13 +41,6 @@ export default function Settings({closeCallback, setMiles, miles, setPracticeMod
             off: "",
         },
         {
-            name: localeList[locale]["Settings3"],
-            setToggle: setToggleHighContrast,
-            toggle: toggleHighContrast,
-            on: "",
-            off: "",
-        },
-        {
             name: localeList[locale]["Settings5"],
             setToggle: setMiles,
             toggle: miles,

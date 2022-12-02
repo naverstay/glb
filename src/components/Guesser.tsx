@@ -53,7 +53,7 @@ export default function Guesser({
 
     const guessInputRef = useRef<HTMLInputElement>(null);
     const guessHolderRef = useRef<HTMLInputElement>(null);
-    const aotocompleteRef = useRef(null);
+    const autocompleteRef = useRef<HTMLDivElement>(null);
 
     const handleOnSelect = (item: AutocompleteItem) => {
         setGuessFlag(item.flag);
@@ -195,7 +195,7 @@ export default function Guesser({
     }, []);
 
     useEffect(() => {
-        const el = aotocompleteRef.current;
+        const el = autocompleteRef.current;
         const observer = new IntersectionObserver(
             ([e]) => e.target.classList.toggle('__pinned', getScrollTop() > 0 && e.intersectionRatio < 1)
             ,
@@ -214,7 +214,7 @@ export default function Guesser({
     console.log('###RENDER### Guesser', autocompleteList);
 
     return (
-        <div ref={aotocompleteRef} className="autocomplete-wrapper">
+        <div ref={autocompleteRef} className="autocomplete-wrapper">
             <style>{css}</style>
             <form className="autocomplete-form" onSubmit={addGuess}>
                 <div ref={guessHolderRef} className={"autocomplete-holder" + (win ? ' __disabled' : '')}>
@@ -280,6 +280,15 @@ export default function Guesser({
                 guesses={guesses.length}
                 practiceMode={practiceMode}
             />
+
+            {/*<ul>*/}
+            {/*    <li>*/}
+            {/*        {*/}
+            {/*            countryData.map(m => <img alt={m.properties.NAME} height={100}*/}
+            {/*                                      src={`images/countries/${m.properties.FLAG.toLowerCase()}/vector.svg`}/>)*/}
+            {/*        }*/}
+            {/*    </li>*/}
+            {/*</ul>*/}
         </div>
     );
 }

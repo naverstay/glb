@@ -69,6 +69,10 @@ body {
         html.dark & {
           filter: invert(100%);
         }
+
+        &.__win {
+          filter: invert(49%) sepia(84%) saturate(7500%) hue-rotate(117deg) brightness(100%) contrast(104%) !important;
+        }
       }
     }
   }
