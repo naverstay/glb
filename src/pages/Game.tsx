@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useContext, useEffect, useMemo, useState} from "react";
+import React, {lazy, Suspense, useEffect, useMemo, useState} from "react";
 import {Country} from "../lib/country";
 import {answerCountry, answerName} from "../util/answer";
 import {setQueryStringParameter, useLocalStorage} from "../hooks/useLocalStorage";
@@ -7,7 +7,6 @@ import {dateDiffInDays, today} from "../util/dates";
 import {polygonDirection, polygonDistance} from "../util/distance";
 import {getColourEmoji} from "../util/colour";
 import {FormattedMessage} from "../context/FormattedMessage";
-import {ThemeContext} from "../context/ThemeContext";
 
 const Guesser = lazy(() => import("../components/Guesser"));
 const List = lazy(() => import("../components/List"));
@@ -127,7 +126,7 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
 
         setCurrentImg(country.properties.FLAG.toLowerCase());
 
-    }, [practiceMode, answerCountry]);
+    }, [practiceMode]);
 
     // Whenever there's a new guess
     useEffect(() => {
