@@ -24,7 +24,7 @@ type Props = {
 
 export default function Game({showLoader, setShowLoader, setShowStats, practiceMode, setMiles, miles}: Props) {
     // Theme
-    const {nightMode = false, prideMode = false, highContrast = false} = useContext(ThemeContext).theme;
+    const {nightMode = false, prideMode = false} = useContext(ThemeContext).theme;
 
     // Get data from local storage
     const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>("worldleGuesses", {

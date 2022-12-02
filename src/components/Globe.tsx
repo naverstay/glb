@@ -22,7 +22,7 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
     const [places, setPlaces] = useState(guesses);
 
     // Theme
-    const {nightMode = false, prideMode = false, highContrast = false} = useContext(ThemeContext).theme;
+    const {nightMode = false, prideMode = false} = useContext(ThemeContext).theme;
 
     // Globe size settings
     const size = isMobile ? 320 : 600; // px on one side
@@ -85,7 +85,6 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
                 country,
                 answerCountry,
                 nightMode,
-                highContrast,
                 prideMode
             );
         }
@@ -93,7 +92,6 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
             country,
             answerCountry,
             nightMode,
-            highContrast,
             prideMode
         );
     }
@@ -109,7 +107,7 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
 
     // Polygon altitude
     function getAltitude(country: Country) {
-        if (!highContrast || country.properties.TYPE === "Territory") return 0.01;
+        if (country.properties.TYPE === "Territory") return 0.01;
         const prox = country.proximity;
         let proxFraction = prox / 2_000_000;
         proxFraction = Math.min(Math.max(proxFraction, 0.01), 0.95);
