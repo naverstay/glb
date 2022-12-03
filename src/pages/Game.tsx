@@ -52,13 +52,22 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
             setGuesses(loadCountries);
             setWin(false);
         } else {
-            const practiceAnswer =
-                countryData[Math.floor(Math.random() * countryData.length)];
+            let country = JSON.parse(
+                localStorage.getItem("worldlePractice") as string
+            );
 
-            localStorage.setItem("worldlePractice", JSON.stringify(practiceAnswer));
+            if (country && practiceStoredGuesses && practiceStoredGuesses.day !== 'win') {
+                setCurrentImg(country.properties.FLAG.toLowerCase());
+            } else {
+                const practiceAnswer =
+                    countryData[Math.floor(Math.random() * countryData.length)];
 
-            setCurrentImg(practiceAnswer.properties.FLAG.toLowerCase());
-            setGuesses([]);
+                localStorage.setItem("worldlePractice", JSON.stringify(practiceAnswer));
+
+                setCurrentImg(practiceAnswer.properties.FLAG.toLowerCase());
+                setGuesses([]);
+            }
+
             setWin(false);
         }
     }

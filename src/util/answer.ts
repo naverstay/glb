@@ -12,7 +12,7 @@ const shuffleAdjust = today < "2022-08-01" ? "5" : "6";
 function generateKeyNew(list: any[], day: string) {
     const [year, month, date] = day.split("-");
     const dayCode = Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(date));
-    const SHUFFLE_KEY = process.env.REACT_APP_SHUFFLE_KEY || "1";
+    const SHUFFLE_KEY = process.env.REACT_APP_SHUFFLE_KEY || "17";
 
     return Math.floor(dayCode / parseInt(SHUFFLE_KEY + shuffleAdjust)) % list.length;
 }

@@ -63,6 +63,7 @@
     "sass": "^1.56.1",
     "sass-loader": "^12.3.0",
     "semver": "^7.3.5",
+    "shx": "^0.3.4",
     "source-map-loader": "^3.0.0",
     "spherical-geometry-js": "^3.0.0",
     "style-loader": "^3.3.1",
@@ -79,6 +80,7 @@
     "start": "cross-env PORT=3011 node scripts/start.js",
     "build": "node scripts/build.js",
     "build_html": "cross-env PUBLIC_URL=./ node scripts/build.js",
+    "deploy": "npm run build_html && shx cp .env build/.env && shx cp build/index.html build/200.html && surge --project ./build --domain tearful-nation.surge.sh",
     "test": "node scripts/test.js",
     "ts": "tsc -w",
     "analyze": "source-map-explorer 'build/static/js/*.js'"

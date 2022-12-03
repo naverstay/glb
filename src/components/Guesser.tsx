@@ -211,7 +211,7 @@ export default function Guesser({
         };
     }, []);
 
-    console.log('###RENDER### Guesser', autocompleteList);
+    console.log('###RENDER### Guesser');
 
     return (
         <div ref={autocompleteRef} className="autocomplete-wrapper">

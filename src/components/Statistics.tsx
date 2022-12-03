@@ -91,18 +91,17 @@ export default function Statistics({closeCallback}: Props) {
 
     // Clipboard
     const [showCopyMsg, setShowCopyMsg] = useState(false);
-    const options = {year: "numeric", month: "short", day: "numeric"};
-    const event = new Date();
-    // @ts-ignore
-    const unambiguousDate = event.toLocaleDateString(locale, options);
-    const date = unambiguousDate === "Invalid Date" ? today : unambiguousDate;
+    // const options = {year: "numeric", month: "short", day: "numeric"};
+    // const event = new Date();
+    // // @ts-ignore
+    // const unambiguousDate = event.toLocaleDateString(locale, options);
+    // const date = unambiguousDate === "Invalid Date" ? today : unambiguousDate;
 
     async function copyToClipboard() {
-        const shareString = `🌎 ${date} 🌍
-🔥 ${worldleCurrentStreak} | ${localeList[locale]["Stats7"]}: ${showAvgGuesses}
-${worldleLastWin === today ? worldleEmojiGuesses : "--"} = ${todaysGuesses}
-
-#globle`;
+        const tries = worldleEmojiGuesses.length / 2;
+        const shareString = (tries > 0 ? `I guessed today’s Worldle in ${tries} ${tries > 1 ? 'tries' : 'try'}:
+${worldleEmojiGuesses}🏆
+` : `I'm playing Worldle `) + 'https://globle.org/worldle';
 
         setShowResetMsg(false);
 
