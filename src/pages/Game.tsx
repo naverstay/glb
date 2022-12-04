@@ -59,12 +59,12 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
             if (!force && country && practiceStoredGuesses && practiceStoredGuesses.day !== 'win') {
                 setCurrentImg(country.properties.FLAG.toLowerCase());
             } else {
-                const practiceAnswer =
+                const practiceAnswer = //countryData.find(f => f.properties.NAME === 'Armenia')
                     countryData[Math.floor(Math.random() * countryData.length)];
 
                 localStorage.setItem("worldlePractice", JSON.stringify(practiceAnswer));
 
-                setCurrentImg(practiceAnswer.properties.FLAG.toLowerCase());
+                setCurrentImg(practiceAnswer?.properties.FLAG.toLowerCase() ?? '');
                 setGuesses([]);
             }
 

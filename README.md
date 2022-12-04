@@ -1,1 +1,1 @@
-# Notes about Globle
+# Notes about Worldle
