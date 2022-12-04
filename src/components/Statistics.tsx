@@ -107,19 +107,22 @@ ${worldleEmojiGuesses}🏆
 
         try {
             if ("canShare" in navigator && isMobile && !isFirefox) {
-                await navigator.share({title: "Plurality Stats", text: shareString});
+                await navigator.share({title: "Worldle Stats", text: shareString});
                 setMsg("Shared!");
                 setShowCopyMsg(true);
+                console.log('canShare');
                 return setTimeout(() => setShowCopyMsg(false), 2000);
             } else if (navigator.clipboard && window.isSecureContext) {
                 await navigator.clipboard.writeText(shareString);
                 setMsg("Copied!");
                 setShowCopyMsg(true);
+                console.log('clipboard');
                 return setTimeout(() => setShowCopyMsg(false), 2000);
             } else {
                 document.execCommand("copy", true, shareString);
                 setMsg("Copied!");
                 setShowCopyMsg(true);
+                console.log('copy');
                 return setTimeout(() => setShowCopyMsg(false), 2000);
             }
         } catch (e) {

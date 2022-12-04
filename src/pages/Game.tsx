@@ -46,9 +46,8 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
     const [storedStats, storeStats] = useLocalStorage<Stats>("worldleStatistics", firstStats);
 
     function enterPracticeMode(force?: boolean) {
+        const loadCountries: Country[] = countryData.filter(m => practiceStoredGuesses.countries.indexOf(m.properties.NAME) > -1)
         if (!force && practiceStoredGuesses?.day === '' && practiceStoredGuesses?.countries?.length) {
-            const loadCountries: Country[] = countryData.filter(m => practiceStoredGuesses.countries.indexOf(m.properties.NAME) > -1)
-
             setGuesses(loadCountries);
             setWin(false);
         } else {
@@ -58,6 +57,7 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
 
             if (!force && country && practiceStoredGuesses && practiceStoredGuesses.day !== 'win') {
                 setCurrentImg(country.properties.FLAG.toLowerCase());
+                setGuesses(loadCountries);
             } else {
                 const practiceAnswer = //countryData.find(f => f.properties.NAME === 'Armenia')
                     countryData[Math.floor(Math.random() * countryData.length)];
