@@ -216,6 +216,9 @@ export default function Guesser({
     return (
         <div ref={autocompleteRef} className="autocomplete-wrapper">
             <style>{css}</style>
+            {process.env.NODE_ENV === 'development' ? <p>
+                {answerName}
+            </p> : null}
             <form className="autocomplete-form" onSubmit={addGuess}>
                 <div ref={guessHolderRef} className={"autocomplete-holder" + (win ? ' __disabled' : '')}>
                     <ReactSearchAutocomplete
@@ -280,15 +283,6 @@ export default function Guesser({
                 guesses={guesses.length}
                 practiceMode={practiceMode}
             />
-
-            {/*<ul>*/}
-            {/*    <li>*/}
-            {/*        {*/}
-            {/*            countryData.map(m => <img alt={m.properties.NAME} height={100}*/}
-            {/*                                      src={`images/countries/${m.properties.FLAG.toLowerCase()}/vector.svg`}/>)*/}
-            {/*        }*/}
-            {/*    </li>*/}
-            {/*</ul>*/}
         </div>
     );
 }

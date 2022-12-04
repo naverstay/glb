@@ -56,7 +56,7 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
                 localStorage.getItem("worldlePractice") as string
             );
 
-            if (country && practiceStoredGuesses && practiceStoredGuesses.day !== 'win') {
+            if (!force && country && practiceStoredGuesses && practiceStoredGuesses.day !== 'win') {
                 setCurrentImg(country.properties.FLAG.toLowerCase());
             } else {
                 const practiceAnswer =
