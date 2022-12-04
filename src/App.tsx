@@ -7,6 +7,8 @@ import Statistics from "./components/Statistics";
 import Fade from "./transitions/Fade";
 import {ThemeContext} from "./context/ThemeContext";
 
+const SHOW_HELP = !localStorage.getItem('guesses');
+
 function App() {
     const [params, setParams] = useState((new URL(document.location as unknown as string)).searchParams);
 
@@ -35,6 +37,21 @@ function App() {
     useEffect(() => {
         document.documentElement.classList.toggle("dark", themeContext.theme.nightMode);
     }, [themeContext.theme.nightMode]);
+
+    // show how to on first visit
+    useEffect(() => {
+        let helpTimer: ReturnType<typeof setTimeout>;
+
+        if (SHOW_HELP) {
+            helpTimer = setTimeout(() => {
+                setShowPopup('help');
+            }, 1000);
+        }
+
+        return () => {
+            clearTimeout(helpTimer)
+        }
+    }, []);
 
     return (
         <div className={`page`}>

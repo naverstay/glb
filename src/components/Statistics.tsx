@@ -124,7 +124,6 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
                 return setTimeout(() => setShowCopyMsg(false), 2000);
             }
         } catch (e) {
-            setMsg("This browser cannot share");
             setShowCopyMsg(true);
             return setTimeout(() => setShowCopyMsg(false), 2000);
         }
