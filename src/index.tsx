@@ -6,7 +6,7 @@ import {ThemeProvider} from "./context/ThemeContext";
 
 (function () {
     let src = '//cdn.jsdelivr.net/npm/eruda';
-    if (!/eruda=1/.test(window.location.search) && localStorage.getItem('active-eruda') != 'true') return;
+    if (!/eruda=1/.test(window.location.search) && localStorage.getItem('active-eruda') !== 'true') return;
     console.log('eruda');
     document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
     document.write('<scr' + 'ipt>eruda.init();</scr' + 'ipt>');
