@@ -8,8 +8,8 @@ import {ThemeProvider} from "./context/ThemeContext";
     let src = '//cdn.jsdelivr.net/npm/eruda';
     if (!/eruda=1/.test(window.location.search) && localStorage.getItem('active-eruda') !== 'true') return;
     console.log('eruda');
-    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
-    document.write('<scr' + 'ipt>eruda.init();</scr' + 'ipt>');
+    document.write('<script src="' + src + '"></script>');
+    document.write('<script>eruda.init();</script>');
 })();
 
 if (process.env.PUBLIC_URL) {
