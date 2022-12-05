@@ -57,7 +57,7 @@ export default function Help({closeCallback}: Props) {
                 </p>
 
                 <ul style={{margin: 0}} className="suggestion-list">
-                    <li className="suggestion-list__row">
+                    <li className="suggestion-list__row __directions">
                         <div className="suggestion-list__name">
                             <div className="suggestion-list__flag"><img src="https://flagcdn.com/w40/de.png"
                                                                         alt="Germany"/></div>
@@ -65,7 +65,7 @@ export default function Help({closeCallback}: Props) {
                         <div className="suggestion-list__data">~ 2,440<span>km</span></div>
                         <div className="suggestion-list__direction">↘️</div>
                     </li>
-                    <li className="suggestion-list__row">
+                    <li className="suggestion-list__row __directions">
                         <div className="suggestion-list__name">
                             <div className="suggestion-list__flag"><img src="https://flagcdn.com/w40/ua.png"
                                                                         alt="Ukraine"/></div>
@@ -73,7 +73,7 @@ export default function Help({closeCallback}: Props) {
                         <div className="suggestion-list__data">~ 730<span>km</span></div>
                         <div className="suggestion-list__direction">↘️</div>
                     </li>
-                    <li className="suggestion-list__row">
+                    <li className="suggestion-list__row __directions">
                         <div className="suggestion-list__name">
                             <div className="suggestion-list__flag"><img src="https://flagcdn.com/w40/ge.png"
                                                                         alt="Georgia"/></div>
@@ -81,7 +81,7 @@ export default function Help({closeCallback}: Props) {
                         <div className="suggestion-list__data">&lt; 10<span>km</span></div>
                         <div className="suggestion-list__direction">↘️</div>
                     </li>
-                    <li className="suggestion-list__row __bingo">
+                    <li className="suggestion-list__row __directions __bingo">
                         <div className="suggestion-list__name">
                             <div className="suggestion-list__flag"><img src="https://flagcdn.com/w40/am.png"
                                                                         alt="Armenia"/></div>
