@@ -19,7 +19,11 @@
       margin-bottom: 3px;
       display: grid;
       gap: 3px;
-      grid-template-columns: 1fr 120px 52px;
+      grid-template-columns: 1fr 120px;
+
+      &.__directions {
+        grid-template-columns: 1fr 120px 52px;
+      }
 
       > div {
         background: $text-blue-color-light;

@@ -8,8 +8,8 @@ type Props = {
     guesses: Country[];
     answerName: string;
     win: boolean;
-    setMiles: React.Dispatch<React.SetStateAction<boolean>>;
     miles: boolean;
+    directions: boolean;
     practiceMode: boolean;
 };
 
@@ -45,7 +45,7 @@ function reorderGuesses(guessList: Country[], practiceMode: boolean) {
     });
 }
 
-export default function List({guesses, answerName, win, practiceMode, setMiles, miles}: Props) {
+export default function List({guesses, answerName, win, practiceMode, miles, directions}: Props) {
     const [orderedGuesses, setOrderedGuesses] = useState(
         reorderGuesses(guesses, practiceMode)
     );
@@ -103,7 +103,9 @@ export default function List({guesses, answerName, win, practiceMode, setMiles, 
 
                     return (
                         <li key={idx}
-                            className={"suggestion-list__row" + (win && idx === 0 ? ' __bingo' : '')}>
+                            className={"suggestion-list__row"
+                            + (win && idx === 0 ? ' __bingo' : '')
+                            + (directions ? ' __directions' : '')}>
                             <div className="suggestion-list__name">
                                 <div className="suggestion-list__flag">
                                     <img src={`https://flagcdn.com/w40/${flag.toLowerCase()}.png`} alt={name}/>
@@ -123,8 +125,8 @@ export default function List({guesses, answerName, win, practiceMode, setMiles, 
                                     <FormattedMessage id={"Settings14"}/>
                                     : (guessesToDisplay.length - idx)}
                             </div>
-                            <div
-                                className="suggestion-list__direction">{win && idx === 0 ? <>🏆</> : DIRECTION_ARROWS[direction]}</div>
+                            {directions ? <div
+                                className="suggestion-list__direction">{win && idx === 0 ? <>🏆</> : DIRECTION_ARROWS[direction]}</div> : null}
                         </li>
                     );
                 })}

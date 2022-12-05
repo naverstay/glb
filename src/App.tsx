@@ -21,6 +21,7 @@ function App() {
     // State
     const [showLoader, setShowLoader] = useState(false);
     const [miles, setMiles] = useState(false);
+    const [directions, setDirections] = useState(true);
 
     const [showPopup, setShowPopup] = useState('');
     const [practiceMode, setPracticeMode] = useState(!!params.get("practice_mode"));
@@ -79,12 +80,14 @@ function App() {
                         practiceMode={practiceMode}
                         setMiles={setMiles}
                         miles={miles}
+                        setDirections={setDirections}
+                        directions={directions}
                         closeCallback={setShowPopup}/>
                 </div>
             </Fade>
 
-            <Game setMiles={setMiles}
-                  miles={miles}
+            <Game miles={miles}
+                  directions={directions}
                   practiceMode={practiceMode}
                   showLoader={showLoader}
                   setShowLoader={setShowLoader}

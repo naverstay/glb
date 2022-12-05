@@ -1,52 +1,54 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import {createContext, ReactNode, useEffect, useState} from "react";
+import {useLocalStorage} from "../hooks/useLocalStorage";
 
 // Use context as follows:
 // ThemeProvider > ThemeContext > themeContext > theme & setTheme
 
 type ProviderProps = {
-  children: ReactNode;
+    children: ReactNode;
 };
 
 type Theme = {
-  nightMode: boolean;
-  prideMode?: boolean;
-  milesMode?: boolean;
+    nightMode: boolean;
+    prideMode?: boolean;
+    milesMode?: boolean;
+    directionsMode?: boolean;
 };
 
 type ThemeContextType = {
-  theme: Theme;
-  setTheme: React.Dispatch<React.SetStateAction<Theme>> | null;
+    theme: Theme;
+    setTheme: React.Dispatch<React.SetStateAction<Theme>> | null;
 };
 
 const initialTheme: Theme = {
-  nightMode: false,
-  milesMode: false,
+    nightMode: false,
+    milesMode: false,
+    directionsMode: true,
 };
 
 const initialThemeContext: ThemeContextType = {
-  theme: initialTheme,
-  setTheme: null,
+    theme: initialTheme,
+    setTheme: null,
 };
 
 export const ThemeContext =
-  createContext<ThemeContextType>(initialThemeContext);
+    createContext<ThemeContextType>(initialThemeContext);
 
-export const ThemeProvider = ({ children }: ProviderProps) => {
-  const [storedTheme, storeTheme] = useLocalStorage<Theme>(
-    "worldleTheme",
-    initialTheme
-  );
+export const ThemeProvider = ({children}: ProviderProps) => {
+    const [storedTheme, storeTheme] = useLocalStorage<Theme>(
+        "worldleTheme",
+        initialTheme
+    );
 
-  const [theme, setTheme] = useState(storedTheme);
+    const [theme, setTheme] = useState(storedTheme);
 
-  useEffect(() => {
-    storeTheme(theme);
-  }, [storeTheme, theme]);
+    useEffect(() => {
+        storeTheme(theme);
+    }, [storeTheme, theme]);
 
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+    return (
+        <ThemeContext.Provider value={{theme, setTheme}}>
+            {children}
+        </ThemeContext.Provider>
+    );
 };

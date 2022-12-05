@@ -77,6 +77,7 @@ export const English: Messages = {
   Settings12: "km",
   Settings13: "m",
   Settings14: "Bingo!",
+  Settings15: "Display direction ➡️",
   Answer: "Answer",
   Closest: "Closest",
   Guessed: "Guessed",

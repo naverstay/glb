@@ -77,6 +77,7 @@ export type Messages = {
   Settings12: string;
   Settings13: string;
   Settings14: string;
+  Settings15: string;
   Answer: string;
   Closest: string;
   Guessed: string;
