@@ -34,7 +34,7 @@ export default function Settings({closeCallback, setMiles, miles, setDirections,
                 directionsMode: directions,
             });
         }
-    }, [toggleTheme, setTheme, miles, directions]);
+    }, [toggleTheme, setTheme, miles, directions, toggleHighContrast]);
 
     const options = [
         {
