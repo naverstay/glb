@@ -19,11 +19,11 @@ type Props = {
     practiceMode: boolean;
     setShowLoader: React.Dispatch<React.SetStateAction<boolean>>;
     setShowStats: React.Dispatch<React.SetStateAction<string>>;
-    setMiles: React.Dispatch<React.SetStateAction<boolean>>;
     miles: boolean;
+    directions: boolean;
 };
 
-export default function Game({showLoader, setShowLoader, setShowStats, practiceMode, setMiles, miles}: Props) {
+export default function Game({showLoader, setShowLoader, setShowStats, practiceMode, directions, miles}: Props) {
     // Get data from local storage
     const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>("guesses", {
         day: today,
@@ -229,8 +229,8 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
                         />
                         <List
                             answerName={answerName}
-                            setMiles={setMiles}
                             miles={miles}
+                            directions={directions}
                             guesses={guesses}
                             win={win}
                             globeRef={globeRef}

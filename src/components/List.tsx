@@ -10,8 +10,8 @@ type Props = {
     guesses: Country[];
     answerName: string;
     win: boolean;
+    directions: boolean;
     globeRef: React.MutableRefObject<GlobeMethods>;
-    setMiles: React.Dispatch<React.SetStateAction<boolean>>;
     miles: boolean;
     practiceMode: boolean;
 };
@@ -48,7 +48,7 @@ function reorderGuesses(guessList: Country[], practiceMode: boolean) {
     });
 }
 
-export default function List({guesses, answerName, win, globeRef, practiceMode, setMiles, miles}: Props) {
+export default function List({guesses, answerName, win, globeRef, practiceMode, directions, miles}: Props) {
     const [orderedGuesses, setOrderedGuesses] = useState(
         reorderGuesses(guesses, practiceMode)
     );
@@ -114,7 +114,9 @@ export default function List({guesses, answerName, win, globeRef, practiceMode, 
 
                     return (
                         <li key={idx}
-                            className={"suggestion-list__row" + (win && idx === 0 ? ' __bingo' : '')}>
+                            className={"suggestion-list__row"
+                            + (win && idx === 0 ? ' __bingo' : '')
+                            + (directions ? ' __directions' : '')}>
                             <div className="suggestion-list__name"
                                  onClick={(e) => turnToCountry(e, idx)}>
                                 <div className="suggestion-list__flag">
@@ -135,8 +137,8 @@ export default function List({guesses, answerName, win, globeRef, practiceMode, 
                                     <FormattedMessage id={"Settings14"}/>
                                     : (guessesToDisplay.length - idx)}
                             </div>
-                            <div
-                                className="suggestion-list__direction">{win && idx === 0 ? <>🏆</> : DIRECTION_ARROWS[direction]}</div>
+                            {directions ? <div
+                                className="suggestion-list__direction">{win && idx === 0 ? <>🏆</> : DIRECTION_ARROWS[direction]}</div> : null}
                         </li>
                     );
                 })}

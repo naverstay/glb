@@ -9,11 +9,14 @@ type Props = {
     closeCallback: React.Dispatch<React.SetStateAction<string>>;
     setPracticeMode: React.Dispatch<React.SetStateAction<boolean>>;
     setMiles: React.Dispatch<React.SetStateAction<boolean>>;
+    setDirections: React.Dispatch<React.SetStateAction<boolean>>;
     practiceMode: boolean;
     miles: boolean;
+    directions: boolean;
 };
 
-export default function Settings({closeCallback, setMiles, miles, setPracticeMode, practiceMode}: Props) {
+export default function Settings({closeCallback, setMiles, miles, setDirections,
+                                     directions, setPracticeMode, practiceMode}: Props) {
     const themeContext = useContext(ThemeContext);
     const [toggleTheme, setToggleTheme] = useState(themeContext.theme.nightMode);
     const [toggleHighContrast, setToggleHighContrast] = useState(themeContext.theme.highContrast);
@@ -28,9 +31,10 @@ export default function Settings({closeCallback, setMiles, miles, setPracticeMod
                 nightMode: toggleTheme,
                 highContrast: toggleHighContrast,
                 milesMode: miles,
+                directionsMode: directions,
             });
         }
-    }, [toggleTheme, toggleHighContrast, setTheme, miles]);
+    }, [toggleTheme, setTheme, miles, directions]);
 
     const options = [
         {
@@ -58,6 +62,13 @@ export default function Settings({closeCallback, setMiles, miles, setPracticeMod
             name: localeList[locale]["Settings4"],
             setToggle: setPracticeMode,
             toggle: practiceMode,
+            on: "",
+            off: ""
+        },
+        {
+            name: localeList[locale]["Settings15"],
+            setToggle: setDirections,
+            toggle: directions,
             on: "",
             off: ""
         },
