@@ -60,6 +60,15 @@ export default function Guesser({
         setGuessName(item.name);
     }
 
+    const handleOnSearch = (string: string, results: AutocompleteItem[]) => {
+        if (results?.length === 1) {
+            setGuessFlag(results[0].flag);
+            setGuessName(results[0].name);
+        } else {
+            setGuessName(string);
+        }
+    }
+
     const handleOnClear = () => {
         setGuessFlag('');
     }
@@ -255,7 +264,7 @@ export default function Guesser({
                             }
                         }
                         placeholder={localeList[locale]["Game1"]}
-                        // onSearch={handleOnSearch}
+                        onSearch={handleOnSearch}
                         // onHover={handleOnHover}
                         onSelect={handleOnSelect}
                         onClear={handleOnClear}
