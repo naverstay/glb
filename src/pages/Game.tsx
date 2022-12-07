@@ -7,6 +7,7 @@ import {dateDiffInDays, today} from "../util/dates";
 import {polygonDirection, polygonDistance} from "../util/distance";
 import {getColourEmoji} from "../util/colour";
 import {FormattedMessage} from "../context/FormattedMessage";
+import Share from "../components/Share";
 
 const Guesser = lazy(() => import("../components/Guesser"));
 const List = lazy(() => import("../components/List"));
@@ -19,31 +20,31 @@ type Props = {
     setShowStats: React.Dispatch<React.SetStateAction<string>>;
     miles: boolean;
     directions: boolean;
+    storeStats: React.Dispatch<React.SetStateAction<Stats>>;
+    storedStats: Stats;
+    firstStats: Stats;
+    storeGuesses: React.Dispatch<React.SetStateAction<Guesses>>;
+    storedGuesses: Guesses;
+    practiceStoreGuesses: React.Dispatch<React.SetStateAction<Guesses>>;
+    practiceStoredGuesses: Guesses;
 };
 
-export default function Game({showLoader, setShowLoader, setShowStats, practiceMode, directions, miles}: Props) {
-    // Get data from local storage
-    const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>("worldleGuesses", {
-        day: today,
-        countries: [],
-    });
+export default function Game({
+                                 practiceStoreGuesses,
+                                 practiceStoredGuesses,
+                                 storeGuesses,
+                                 storedGuesses,
+                                 showLoader,
+                                 setShowLoader,
+                                 setShowStats,
+                                 firstStats,
+                                 practiceMode,
+                                 directions,
+                                 miles,
+                                 storedStats,
+                                 storeStats
+                             }: Props) {
 
-    const [practiceStoredGuesses, practiceStoreGuesses] = useLocalStorage<Guesses>("worldlePracticeGuesses", {
-        day: '',
-        countries: [],
-    });
-
-    const firstStats = {
-        worldleGamesPlayed: 0,
-        worldleGamesWon: 0,
-        worldleLastWin: new Date(0).toLocaleDateString("en-CA"),
-        worldleCurrentStreak: 0,
-        worldleMaxStreak: 0,
-        worldleUsedGuesses: [],
-        worldleEmojiGuesses: "",
-    };
-
-    const [storedStats, storeStats] = useLocalStorage<Stats>("worldleStatistics", firstStats);
 
     function enterPracticeMode(force?: boolean) {
         const loadCountries: Country[] = countryData.filter(m => practiceStoredGuesses.countries.indexOf(m.properties.NAME) > -1)
@@ -239,6 +240,13 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
                     setWin={setWin}
                     practiceMode={practiceMode}
                 />
+
+                {win ? <Share storedGuesses={storedGuesses}
+                              storeGuesses={storeGuesses}
+                              firstStats={firstStats}
+                              storedStats={storedStats}
+                              storeStats={storeStats}
+                              practiceMode={practiceMode}/> : null}
 
                 {!showLoader && (
                     <div className="globe-holder">

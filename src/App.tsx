@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Game from "./pages/Game";
 import Header from "./components/Header";
 import Help from "./pages/Help";
@@ -6,6 +6,9 @@ import Settings from "./pages/Settings";
 import Statistics from "./components/Statistics";
 import Fade from "./transitions/Fade";
 import {ThemeContext} from "./context/ThemeContext";
+import {useLocalStorage} from "./hooks/useLocalStorage";
+import {Guesses, Stats} from "./lib/localStorage";
+import {today} from "./util/dates";
 
 const SHOW_HELP = !localStorage.getItem('worldleGuesses');
 
@@ -25,6 +28,29 @@ function App() {
 
     const [showPopup, setShowPopup] = useState('');
     const [practiceMode, setPracticeMode] = useState(!!params.get("practice_mode"));
+
+    const firstStats: Stats = {
+        worldleGamesPlayed: 0,
+        worldleGamesWon: 0,
+        worldleLastWin: new Date(0).toLocaleDateString("en-CA"),
+        worldleCurrentStreak: 0,
+        worldleMaxStreak: 0,
+        worldleUsedGuesses: [],
+        worldleEmojiGuesses: "",
+    };
+
+    const [storedStats, storeStats] = useLocalStorage<Stats>("worldleStatistics", firstStats);
+
+    // Get data from local storage
+    const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>("worldleGuesses", {
+        day: today,
+        countries: [],
+    });
+
+    const [practiceStoredGuesses, practiceStoreGuesses] = useLocalStorage<Guesses>("worldlePracticeGuesses", {
+        day: '',
+        countries: [],
+    });
 
     // Context
     const themeContext = useContext(ThemeContext);
@@ -63,7 +89,13 @@ function App() {
 
             <Fade show={showPopup === 'stats'} background={"popup-holder"} closeCallback={setShowPopup}>
                 <div className="popup container">
-                    <Statistics practiceMode={practiceMode} closeCallback={setShowPopup}/>
+                    <Statistics storedStats={storedStats}
+                                storeStats={storeStats}
+                                storedGuesses={storedGuesses}
+                                storeGuesses={storeGuesses}
+                                practiceMode={practiceMode}
+                                firstStats={firstStats}
+                                closeCallback={setShowPopup}/>
                 </div>
             </Fade>
 
@@ -90,6 +122,13 @@ function App() {
                   directions={directions}
                   practiceMode={practiceMode}
                   showLoader={showLoader}
+                  storedStats={storedStats}
+                  storeStats={storeStats}
+                  firstStats={firstStats}
+                  storedGuesses={storedGuesses}
+                  storeGuesses={storeGuesses}
+                  practiceStoredGuesses={practiceStoredGuesses}
+                  practiceStoreGuesses={practiceStoreGuesses}
                   setShowLoader={setShowLoader}
                   setShowStats={setShowPopup}/>
         </div>
