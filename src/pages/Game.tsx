@@ -241,12 +241,12 @@ export default function Game({
                     practiceMode={practiceMode}
                 />
 
-                {win ? <Share storedGuesses={storedGuesses}
-                              storeGuesses={storeGuesses}
-                              firstStats={firstStats}
-                              storedStats={storedStats}
-                              storeStats={storeStats}
-                              practiceMode={practiceMode}/> : null}
+                {win && !practiceMode ? <Share storedGuesses={storedGuesses}
+                                               storeGuesses={storeGuesses}
+                                               firstStats={firstStats}
+                                               storedStats={storedStats}
+                                               storeStats={storeStats}
+                                               practiceMode={practiceMode}/> : null}
 
                 {!showLoader && (
                     <div className="globe-holder">
