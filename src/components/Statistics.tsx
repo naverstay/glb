@@ -35,7 +35,6 @@ export default function Statistics({
         currentStreak,
         maxStreak,
         usedGuesses,
-        emojiGuesses,
     } = storedStats;
 
     const sumGuesses = usedGuesses.reduce((a, b) => a + b, 0);
