@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {useLocalStorage} from "../hooks/useLocalStorage";
 import {Guesses, Stats} from "../lib/localStorage";
 import {isMobile} from "react-device-detect";
 import {isFirefox} from "react-device-detect";

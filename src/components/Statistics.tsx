@@ -1,5 +1,4 @@
 import React, {useRef} from "react";
-import {useLocalStorage} from "../hooks/useLocalStorage";
 import {Guesses, Stats} from "../lib/localStorage";
 import {isMobile} from "react-device-detect";
 import {getPath} from "../util/svg";
@@ -7,7 +6,6 @@ import {today} from "../util/dates";
 import {FormattedMessage} from "../context/FormattedMessage";
 import localeList from "../i18n/messages";
 import Share from "./Share";
-import Game from "../pages/Game";
 
 type Props = {
     practiceMode: boolean;

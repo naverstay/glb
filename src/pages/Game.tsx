@@ -1,7 +1,7 @@
 import React, {lazy, Suspense, useEffect, useMemo, useState} from "react";
 import {Country} from "../lib/country";
 import {answerCountry, answerName} from "../util/answer";
-import {setQueryStringParameter, useLocalStorage} from "../hooks/useLocalStorage";
+import {setQueryStringParameter} from "../hooks/useLocalStorage";
 import {Guesses, Stats} from "../lib/localStorage";
 import {dateDiffInDays, today} from "../util/dates";
 import {polygonDirection, polygonDistance} from "../util/distance";
