@@ -225,6 +225,9 @@ export default function Guesser({
     return (
         <div ref={aotocompleteRef} className="autocomplete-wrapper">
             <style>{css}</style>
+            {process.env.NODE_ENV === 'development' ? <p>
+                {answerName}
+            </p> : null}
             <form className="autocomplete-form" onSubmit={addGuess}>
                 <div ref={guessHolderRef} className={"autocomplete-holder" + (win ? ' __disabled' : '')}>
                     <ReactSearchAutocomplete

@@ -1,36 +1,33 @@
-import {useRef, useState} from "react";
-import {useLocalStorage} from "../hooks/useLocalStorage";
-import {Stats} from "../lib/localStorage";
+import React, {useRef} from "react";
+import {Guesses, Stats} from "../lib/localStorage";
 import {isMobile} from "react-device-detect";
 import {getPath} from "../util/svg";
 import {today} from "../util/dates";
-import {isFirefox} from "react-device-detect";
 import {FormattedMessage} from "../context/FormattedMessage";
 import localeList from "../i18n/messages";
-import Fade from "../transitions/Fade";
+import Share from "./Share";
 
 type Props = {
+    practiceMode: boolean;
     closeCallback: React.Dispatch<React.SetStateAction<string>>;
+    storeStats: React.Dispatch<React.SetStateAction<Stats>>;
+    storedStats: Stats;
+    firstStats: Stats;
+    storeGuesses: React.Dispatch<React.SetStateAction<Guesses>>;
+    storedGuesses: Guesses;
 };
 
-export default function Statistics({closeCallback}: Props) {
+export default function Statistics({
+                                       closeCallback,
+                                       storeGuesses,
+                                       storedGuesses,
+                                       practiceMode,
+                                       storedStats,
+                                       firstStats,
+                                       storeStats,
+                                   }: Props) {
     const locale = 'en-CA';
 
-    // Stats data
-    const firstStats = {
-        gamesPlayed: 0,
-        gamesWon: 0,
-        lastWin: new Date(0).toLocaleDateString("en-CA"),
-        currentStreak: 0,
-        maxStreak: 0,
-        usedGuesses: [],
-        emojiGuesses: "",
-    };
-
-    const [storedStats, storeStats] = useLocalStorage<Stats>(
-        "statistics",
-        firstStats
-    );
     const {
         // gamesPlayed,
         gamesWon,
@@ -66,69 +63,6 @@ export default function Statistics({closeCallback}: Props) {
     // Closing the modal
     const modalRef = useRef<HTMLDivElement>(null!);
 
-    // Reset stats
-    const [msg, setMsg] = useState("");
-    const [showResetMsg, setShowResetMsg] = useState(false);
-    const [resetComplete, setResetComplete] = useState(false);
-
-    // const [question, setQuestion] = useState(false);
-    function promptReset() {
-        setMsg(localeList[locale]["Stats10"]);
-        // setQuestion(true);
-        setResetComplete(false);
-        setShowResetMsg(true);
-    }
-
-    function resetStats() {
-        storeStats(firstStats);
-        setShowResetMsg(false);
-        setTimeout(() => {
-            setMsg(localeList[locale]["Stats11"]);
-            setShowCopyMsg(true);
-        }, 200);
-        setTimeout(() => setShowCopyMsg(false), 2200);
-    }
-
-    // Clipboard
-    const [showCopyMsg, setShowCopyMsg] = useState(false);
-    const options = {year: "numeric", month: "short", day: "numeric"};
-    const event = new Date();
-    // @ts-ignore
-    const unambiguousDate = event.toLocaleDateString(locale, options);
-    const date = unambiguousDate === "Invalid Date" ? today : unambiguousDate;
-
-    async function copyToClipboard() {
-        const shareString = `🌎 ${date} 🌍
-🔥 ${currentStreak} | ${localeList[locale]["Stats7"]}: ${showAvgGuesses}
-${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
-
-#globle`;
-
-        setShowResetMsg(false);
-
-        try {
-            if ("canShare" in navigator && isMobile && !isFirefox) {
-                await navigator.share({title: "Plurality Stats", text: shareString});
-                setMsg("Shared!");
-                setShowCopyMsg(true);
-                return setTimeout(() => setShowCopyMsg(false), 2000);
-            } else if (navigator.clipboard && window.isSecureContext) {
-                await navigator.clipboard.writeText(shareString);
-                setMsg("Copied!");
-                setShowCopyMsg(true);
-                return setTimeout(() => setShowCopyMsg(false), 2000);
-            } else {
-                document.execCommand("copy", true, shareString);
-                setMsg("Copied!");
-                setShowCopyMsg(true);
-                return setTimeout(() => setShowCopyMsg(false), 2000);
-            }
-        } catch (e) {
-            setShowCopyMsg(true);
-            return setTimeout(() => setShowCopyMsg(false), 2000);
-        }
-    }
-
     return (
         <div ref={modalRef} className="popup-content">
             <div className="popup-header">
@@ -163,31 +97,14 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
                     })}
                 </div>
 
-                <div className={"stat-controls"}>
-                    <button disabled={showResetMsg} className="btn btn-darkblue" onClick={copyToClipboard}>
-                        <FormattedMessage id="Stats9"/>
-                    </button>
-                    <button disabled={showResetMsg} className="btn btn-red__border" onClick={promptReset}>
-                        <FormattedMessage id="Stats8"/>
-                    </button>
-                </div>
-                <Fade show={showResetMsg} background="">
-                    <p className="text-center">{msg}</p>
-                    <div className="stat-controls">
-                        <button className="btn btn-red__border"
-                                onClick={resetStats} disabled={resetComplete}
-                        >Yes
-                        </button>
-                        <button className="btn btn-darkblue"
-                                onClick={() => setShowResetMsg(false)}
-                                disabled={resetComplete}
-                        >No
-                        </button>
-                    </div>
-                </Fade>
-                <Fade show={showCopyMsg && !showResetMsg} background="">
-                    <p className="text-center">{msg}</p>
-                </Fade>
+                <Share storedGuesses={storedGuesses}
+                       storeGuesses={storeGuesses}
+                       firstStats={firstStats}
+                       storedStats={storedStats}
+                       storeStats={storeStats}
+                       practiceMode={practiceMode}
+                       showResetBtn={true}
+                       fullStat={true}/>
             </div>
         </div>
     );

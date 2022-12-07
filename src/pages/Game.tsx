@@ -2,12 +2,13 @@ import React, {lazy, Suspense, useEffect, useMemo, useRef, useState} from "react
 import {GlobeMethods} from "react-globe.gl";
 import {Country} from "../lib/country";
 import {answerCountry, answerName} from "../util/answer";
-import {setQueryStringParameter, useLocalStorage} from "../hooks/useLocalStorage";
+import {setQueryStringParameter} from "../hooks/useLocalStorage";
 import {Guesses, Stats} from "../lib/localStorage";
 import {dateDiffInDays, today} from "../util/dates";
 import {polygonDirection, polygonDistance} from "../util/distance";
 import {getColourEmoji} from "../util/colour";
 import {FormattedMessage} from "../context/FormattedMessage";
+import Share from "../components/Share";
 
 const Globe = lazy(() => import("../components/Globe"));
 const Guesser = lazy(() => import("../components/Guesser"));
@@ -21,31 +22,30 @@ type Props = {
     setShowStats: React.Dispatch<React.SetStateAction<string>>;
     miles: boolean;
     directions: boolean;
+    storeStats: React.Dispatch<React.SetStateAction<Stats>>;
+    storedStats: Stats;
+    firstStats: Stats;
+    storeGuesses: React.Dispatch<React.SetStateAction<Guesses>>;
+    storedGuesses: Guesses;
+    practiceStoreGuesses: React.Dispatch<React.SetStateAction<Guesses>>;
+    practiceStoredGuesses: Guesses;
 };
 
-export default function Game({showLoader, setShowLoader, setShowStats, practiceMode, directions, miles}: Props) {
-    // Get data from local storage
-    const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>("guesses", {
-        day: today,
-        countries: [],
-    });
-
-    const [practiceStoredGuesses, practiceStoreGuesses] = useLocalStorage<Guesses>("practiceGuesses", {
-        day: '',
-        countries: [],
-    });
-
-    const firstStats = {
-        gamesPlayed: 0,
-        gamesWon: 0,
-        lastWin: new Date(0).toLocaleDateString("en-CA"),
-        currentStreak: 0,
-        maxStreak: 0,
-        usedGuesses: [],
-        emojiGuesses: "",
-    };
-
-    const [storedStats, storeStats] = useLocalStorage<Stats>("statistics", firstStats);
+export default function Game({
+                                 practiceStoreGuesses,
+                                 practiceStoredGuesses,
+                                 storeGuesses,
+                                 storedGuesses,
+                                 showLoader,
+                                 setShowLoader,
+                                 setShowStats,
+                                 firstStats,
+                                 practiceMode,
+                                 directions,
+                                 miles,
+                                 storedStats,
+                                 storeStats
+                             }: Props) {
 
     function enterPracticeMode(force?: boolean) {
         if (!force && practiceStoredGuesses?.day === '' && practiceStoredGuesses?.countries?.length) {
@@ -219,6 +219,13 @@ export default function Game({showLoader, setShowLoader, setShowStats, practiceM
                     setWin={setWin}
                     practiceMode={practiceMode}
                 />
+
+                {win && !practiceMode ? <Share storedGuesses={storedGuesses}
+                                               storeGuesses={storeGuesses}
+                                               firstStats={firstStats}
+                                               storedStats={storedStats}
+                                               storeStats={storeStats}
+                                               practiceMode={practiceMode}/> : null}
 
                 {!showLoader && (
                     <div className="globe-holder">
