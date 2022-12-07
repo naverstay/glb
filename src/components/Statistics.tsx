@@ -10,10 +10,11 @@ import localeList from "../i18n/messages";
 import Fade from "../transitions/Fade";
 
 type Props = {
+    practiceMode: boolean;
     closeCallback: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function Statistics({closeCallback}: Props) {
+export default function Statistics({closeCallback, practiceMode}: Props) {
     const locale = 'en-CA';
 
     // Stats data
@@ -32,7 +33,6 @@ export default function Statistics({closeCallback}: Props) {
         firstStats
     );
     const {
-        // worldleGamesPlayed,
         worldleGamesWon,
         worldleLastWin,
         worldleCurrentStreak,
@@ -48,7 +48,6 @@ export default function Statistics({closeCallback}: Props) {
         worldleLastWin === today ? worldleUsedGuesses[worldleUsedGuesses.length - 1] : "--";
 
     const showworldleLastWin = worldleLastWin >= "2022-01-01" ? worldleLastWin : "--";
-    // const winPercent = worldleGamesWon && worldleGamesPlayed ? Math.ceil(100 * (worldleGamesWon / worldleGamesPlayed)) : "--";
 
     const avgShorthand = isMobile
         ? localeList[locale]["Stats7"]
@@ -74,7 +73,6 @@ export default function Statistics({closeCallback}: Props) {
     // const [question, setQuestion] = useState(false);
     function promptReset() {
         setMsg(localeList[locale]["Stats10"]);
-        // setQuestion(true);
         setResetComplete(false);
         setShowResetMsg(true);
     }
@@ -91,15 +89,10 @@ export default function Statistics({closeCallback}: Props) {
 
     // Clipboard
     const [showCopyMsg, setShowCopyMsg] = useState(false);
-    // const options = {year: "numeric", month: "short", day: "numeric"};
-    // const event = new Date();
-    // // @ts-ignore
-    // const unambiguousDate = event.toLocaleDateString(locale, options);
-    // const date = unambiguousDate === "Invalid Date" ? today : unambiguousDate;
 
     async function copyToClipboard() {
         const tries = worldleEmojiGuesses.length / 2;
-        const shareString = (tries > 0 ? `I guessed today’s Worldle in ${tries} ${tries > 1 ? 'tries' : 'try'}:
+        const shareString = ( !practiceMode && tries > 0 ? `I guessed today’s Worldle in ${tries} ${tries > 1 ? 'tries' : 'try'}:
 ${worldleEmojiGuesses}🏆
 ` : `I'm playing Worldle `) + 'https://globle.org/worldle';
 

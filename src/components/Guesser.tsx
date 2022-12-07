@@ -61,11 +61,12 @@ export default function Guesser({
     }
 
     const handleOnSearch = (string: string, results: AutocompleteItem[]) => {
-        if (results?.length === 1) {
+        if (results?.length === 0) {
+            setGuessName(string);
+            setGuessFlag("");
+        } else {
             setGuessFlag(results[0].flag);
             setGuessName(results[0].name);
-        } else {
-            setGuessName(string);
         }
     }
 

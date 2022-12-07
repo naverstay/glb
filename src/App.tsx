@@ -63,7 +63,7 @@ function App() {
 
             <Fade show={showPopup === 'stats'} background={"popup-holder"} closeCallback={setShowPopup}>
                 <div className="popup container">
-                    <Statistics closeCallback={setShowPopup}/>
+                    <Statistics practiceMode={practiceMode} closeCallback={setShowPopup}/>
                 </div>
             </Fade>
 
