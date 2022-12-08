@@ -1,6 +1,5 @@
 'use strict';
 
-const dataUri = require('./dataUri.json');
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
@@ -93,6 +92,7 @@ module.exports = function (webpackEnv) {
   const isEnvProduction = webpackEnv === 'production';
 
   if (process.env.NODE_ENV) {
+    const dataUri = require('./dataUri.json');
     process.env.DAY_IMG = dataUri.day;
     process.env.NIGHT_IMG = dataUri.night;
   }
