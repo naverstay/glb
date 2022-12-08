@@ -48,11 +48,20 @@ export function turnGlobe(
     globeRef.current.pointOfView(coords, 250);
 }
 
-export const globeImg = (nightMode: boolean) => {
+export const globeImg = (nightMode: boolean, dataUri = false) => {
     const time = nightMode ? "night" : "day";
+
+    if (dataUri) {
+        if (time === 'day') {
+            return process.env.DAY_IMG || '';
+        } else {
+            return process.env.NIGHT_IMG || '';
+        }
+    }
+
     if (isSafari && browserVersion < "14") {
-        return `/images/safari-14-earth-${time}.jpg`;
+        return process.env.PUBLIC_URL + `/images/safari-14-earth-${time}.jpg`;
     } else {
-        return `/images/earth-${time}.webp`;
+        return process.env.PUBLIC_URL + `/images/earth-${time}.webp`;
     }
 };

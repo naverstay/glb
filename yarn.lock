@@ -7860,10 +7860,10 @@ react-error-overlay@^6.0.11:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.11.tgz#92835de5841c5cf08ba00ddd2d677b6d17ff9adb"
   integrity sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==
 
-react-globe.gl@^2.22.7:
-  version "2.22.7"
-  resolved "https://registry.yarnpkg.com/react-globe.gl/-/react-globe.gl-2.22.7.tgz#7db5a3041cc037aa2993e02bea6d4cfff65b2df6"
-  integrity sha512-hewY9UzMab6chqvButI63ZvutDQ/4t/gGQmQjf2/0q6MvaDkbUDrEaXAXBc7ZZbcRmuglI5V7Bj4Ffln8Vn8fg==
+react-globe.gl@^2.22.8:
+  version "2.22.8"
+  resolved "https://registry.yarnpkg.com/react-globe.gl/-/react-globe.gl-2.22.8.tgz#b54600b652b6f2ab703e96cf102a766571a0befa"
+  integrity sha512-V4FkIFtS/IanskwUuhVA3p/zJ2AHf0CtoAa1OPtyNZY9FGp+25hFfmN99MSSVZ5UBRmMZPGE+aEqPXIpGSjcig==
   dependencies:
     globe.gl "^2.26"
     prop-types "^15.8"
@@ -7908,15 +7908,15 @@ react-kapsule@^2.2:
     fromentries "^1.3.2"
     jerrypick "^1.0.5"
 
-react-refresh@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.11.0.tgz#77198b944733f0f1f1a90e791de4541f9f074046"
-  integrity sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==
+react-refresh@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.14.0.tgz#4e02825378a5f227079554d4284889354e5f553e"
+  integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
 
-react-search-autocomplete@^8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/react-search-autocomplete/-/react-search-autocomplete-8.1.0.tgz#b5c846b3baee05d771b42e948e5b6caeb66143d1"
-  integrity sha512-fznfXab0AkNtCaNnms3krUmj/ey9e7rIDZfK6biLxiRKO4O4FPIHbGDKth2sTEWS+zpd2LwXyLsZGF/XyLny6A==
+react-search-autocomplete@^8.2.1:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/react-search-autocomplete/-/react-search-autocomplete-8.2.1.tgz#95c4c9d454c790cb989cfee1faaa292fe96b6480"
+  integrity sha512-DGxOsfiGjkAyOhM8Nz8UMkEm/PoOz3UNFSRy4+YRuRyWTUan/IuKRqMH99TqC6yLpm9jzB8RLQlwyVwL/lzc/w==
   dependencies:
     fuse.js "^6.5.3"
     styled-components "^5.3.3"
