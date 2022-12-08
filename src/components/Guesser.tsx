@@ -61,12 +61,15 @@ export default function Guesser({
     }
 
     const handleOnSearch = (string: string, results: AutocompleteItem[]) => {
-        if (results?.length === 0) {
-            setGuessName(string);
-            setGuessFlag("");
-        } else {
+        if (results?.length === 1) {
             setGuessFlag(results[0].flag);
             setGuessName(results[0].name);
+        } else {
+            setGuessName(string);
+        }
+
+        if (!string) {
+            setGuessFlag('');
         }
     }
 
@@ -153,9 +156,7 @@ export default function Guesser({
 
     function addGuess(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        setError("");
-        setGuessFlag("");
-        setAutoCompleteIndex(autoCompleteIndex + 1);
+
         let guessCountry = runChecks();
 
         if (practiceMode) {
@@ -177,6 +178,10 @@ export default function Guesser({
             setGuesses([guessCountry, ...guesses]);
             setGuessName("");
         }
+
+        setError("");
+        setGuessFlag("");
+        setAutoCompleteIndex(autoCompleteIndex + 1);
     }
 
     const autocompleteList = useMemo(() => {
@@ -221,8 +226,6 @@ export default function Guesser({
         };
     }, []);
 
-    console.log('###RENDER### Guesser');
-
     return (
         <div ref={autocompleteRef} className="autocomplete-wrapper">
             <style>{css}</style>
@@ -234,7 +237,7 @@ export default function Guesser({
                     <ReactSearchAutocomplete
                         key={autoCompleteIndex}
                         items={autocompleteList}
-                        showItemsOnFocus={true}
+                        // showItemsOnFocus={true}
                         showIcon={false}
                         showClear={true}
                         maxResults={10}
