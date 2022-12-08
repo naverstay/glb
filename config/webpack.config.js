@@ -92,9 +92,8 @@ module.exports = function (webpackEnv) {
   const isEnvProduction = webpackEnv === 'production';
 
   if (process.env.NODE_ENV) {
-    const dataUri = require('./dataUri.json');
-    process.env.DAY_IMG = dataUri.day;
-    process.env.NIGHT_IMG = dataUri.night;
+    process.env.DAY_IMG = require('./dataUriDay.json').data;
+    process.env.NIGHT_IMG = require('./dataUriNight.json').data;
   }
   // Variable used for enabling profiling in Production
   // passed into alias object. Uses a flag if passed into the build command
