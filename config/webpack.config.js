@@ -91,10 +91,12 @@ module.exports = function (webpackEnv) {
   const isEnvDevelopment = webpackEnv === 'development';
   const isEnvProduction = webpackEnv === 'production';
 
-  if (process.env.NODE_ENV) {
-    process.env.DAY_IMG = require('./dataUriDay.json').data;
-    process.env.NIGHT_IMG = require('./dataUriNight.json').data;
-  }
+  // todo uncomment for local version
+  //if (process.env.NODE_ENV) {
+  //  process.env.DAY_IMG = require('./dataUriDay.json').data;
+  //  process.env.NIGHT_IMG = require('./dataUriNight.json').data;
+  //}
+
   // Variable used for enabling profiling in Production
   // passed into alias object. Uses a flag if passed into the build command
   const isEnvProductionProfile =
