@@ -108,7 +108,7 @@ export default function List({guesses, answerName, win, practiceMode, miles, dir
                             + (directions ? ' __directions' : '')}>
                             <div className="suggestion-list__name">
                                 <div className="suggestion-list__flag">
-                                    <img src={`https://flagcdn.com/w40/${flag.toLowerCase()}.png`} alt={name}/>
+                                    <img src={`${process.env.PUBLIC_URL}/images/flags/${flag.toLowerCase()}.png`} alt={name}/>
                                 </div>
                                 <span>{name}</span>
                             </div>

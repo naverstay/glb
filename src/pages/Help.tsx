@@ -59,32 +59,36 @@ export default function Help({closeCallback}: Props) {
                 <ul style={{margin: 0}} className="suggestion-list">
                     <li className="suggestion-list__row __directions">
                         <div className="suggestion-list__name">
-                            <div className="suggestion-list__flag"><img src="https://flagcdn.com/w40/de.png"
-                                                                        alt="Germany"/></div>
+                            <div className="suggestion-list__flag"><img
+                                src={`${process.env.PUBLIC_URL}/images/flags/de.png`}
+                                alt="Germany"/></div>
                             <span>Germany</span></div>
                         <div className="suggestion-list__data">~ 2,440<span>km</span></div>
                         <div className="suggestion-list__direction">↘️</div>
                     </li>
                     <li className="suggestion-list__row __directions">
                         <div className="suggestion-list__name">
-                            <div className="suggestion-list__flag"><img src="https://flagcdn.com/w40/ua.png"
-                                                                        alt="Ukraine"/></div>
+                            <div className="suggestion-list__flag"><img
+                                src={`${process.env.PUBLIC_URL}/images/flags/ua.png`}
+                                alt="Ukraine"/></div>
                             <span>Ukraine</span></div>
                         <div className="suggestion-list__data">~ 730<span>km</span></div>
                         <div className="suggestion-list__direction">↘️</div>
                     </li>
                     <li className="suggestion-list__row __directions">
                         <div className="suggestion-list__name">
-                            <div className="suggestion-list__flag"><img src="https://flagcdn.com/w40/ge.png"
-                                                                        alt="Georgia"/></div>
+                            <div className="suggestion-list__flag"><img
+                                src={`${process.env.PUBLIC_URL}/images/flags/ge.png`}
+                                alt="Georgia"/></div>
                             <span>Georgia</span></div>
                         <div className="suggestion-list__data">&lt; 10<span>km</span></div>
                         <div className="suggestion-list__direction">↘️</div>
                     </li>
                     <li className="suggestion-list__row __directions __bingo">
                         <div className="suggestion-list__name">
-                            <div className="suggestion-list__flag"><img src="https://flagcdn.com/w40/am.png"
-                                                                        alt="Armenia"/></div>
+                            <div className="suggestion-list__flag"><img
+                                src={`${process.env.PUBLIC_URL}/images/flags/am.png`}
+                                alt="Armenia"/></div>
                             <span>Armenia</span></div>
                         <div className="suggestion-list__data"><span>Bingo!</span></div>
                         <div className="suggestion-list__direction">🏆</div>
