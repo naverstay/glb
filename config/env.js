@@ -61,6 +61,14 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
 const REACT_APP = /^REACT_APP_/i;
 
 function getClientEnvironment(publicUrl) {
+  let DAY_IMG = '';
+  let NIGHT_IMG = '';
+  // todo uncomment when build local version
+  //if (process.env.NODE_ENV === 'development' || process.env.PUBLIC_URL) {
+  //  DAY_IMG = require('./dataUriDay.json').data;
+  //  NIGHT_IMG = require('./dataUriNight.json').data;
+  //}
+
   const raw = Object.keys(process.env)
     .filter(key => REACT_APP.test(key))
     .reduce(
@@ -77,6 +85,8 @@ function getClientEnvironment(publicUrl) {
         // This should only be used as an escape hatch. Normally you would put
         // images into the `src` and `import` them in code to get their paths.
         PUBLIC_URL: publicUrl,
+        DAY_IMG,
+        NIGHT_IMG,
         // We support configuring the sockjs pathname during development.
         // These settings let a developer run multiple simultaneous projects.
         // They are used as the connection `hostname`, `pathname` and `port`

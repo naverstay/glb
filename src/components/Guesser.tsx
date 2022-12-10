@@ -88,7 +88,7 @@ export default function Guesser({
     }, [guessInputRef]);
 
     const css = useMemo(() => {
-        const bg = guessFlag ? `url(/images/countries/${guessFlag.toLowerCase()}.png)` : 'unset';
+        const bg = guessFlag ? `url(${process.env.PUBLIC_URL}/images//countries/${guessFlag.toLowerCase()}.png)` : 'unset';
 
         return `.autocomplete-holder .wrapper > div:first-child::before {
             background-image: ${bg};
@@ -246,7 +246,7 @@ export default function Guesser({
 
                             return <div className="result-item">
                                 <span className="result-item__icon"><img
-                                    src={`/images/countries/${flag.toLowerCase()}.png`}
+                                    src={`${process.env.PUBLIC_URL}/images/countries/${flag.toLowerCase()}.png`}
                                     alt={name}
                                 /></span>
                                 <span className="result-item__text">{name}</span>

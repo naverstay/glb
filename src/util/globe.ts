@@ -48,10 +48,10 @@ export function turnGlobe(
     globeRef.current.pointOfView(coords, 250);
 }
 
-export const globeImg = (nightMode: boolean, dataUri = false) => {
+export const globeImg = (nightMode: boolean) => {
     const time = nightMode ? "night" : "day";
 
-    if (dataUri) {
+    if (process.env.DAY_IMG && process.env.NIGHT_IMG) {
         if (time === 'day') {
             return process.env.DAY_IMG || '';
         } else {

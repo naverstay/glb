@@ -156,7 +156,7 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
                     className="globe-react "
                     style={{"-webkit-tap-highlight-color": "transparent"}}
                     ref={globeRef}
-                    globeImageUrl={globeImg(nightMode, !!process.env.PUBLIC_URL)}
+                    globeImageUrl={globeImg(nightMode)}
                     width={size}
                     height={size}
                     backgroundColor="#00000000"
