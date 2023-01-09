@@ -15,6 +15,9 @@ const SHOW_HELP = !localStorage.getItem('worldleGuesses');
 function App() {
     const [params, setParams] = useState((new URL(document.location as unknown as string)).searchParams);
 
+    // Context
+    const themeContext = useContext(ThemeContext);
+
     window.onpopstate = window.history.pushState = function (e) {
         if (params !== (new URL(document.location as unknown as string)).searchParams) {
             setParams((new URL(document.location as unknown as string)).searchParams)
@@ -22,9 +25,9 @@ function App() {
     };
 
     // State
+    const [directions, setDirections] = useState(themeContext.theme.directionsMode);
+    const [miles, setMiles] = useState(themeContext.theme.milesMode);
     const [showLoader, setShowLoader] = useState(false);
-    const [miles, setMiles] = useState(false);
-    const [directions, setDirections] = useState(true);
 
     const [showPopup, setShowPopup] = useState('');
     const [practiceMode, setPracticeMode] = useState(!!params.get("practice_mode"));
@@ -51,9 +54,6 @@ function App() {
         day: '',
         countries: [],
     });
-
-    // Context
-    const themeContext = useContext(ThemeContext);
 
     // Re-render globe
     useEffect(() => {

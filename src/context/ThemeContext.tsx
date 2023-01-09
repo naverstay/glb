@@ -11,8 +11,8 @@ type ProviderProps = {
 type Theme = {
     nightMode: boolean;
     prideMode?: boolean;
-    milesMode?: boolean;
-    directionsMode?: boolean;
+    milesMode: boolean;
+    directionsMode: boolean;
 };
 
 type ThemeContextType = {
