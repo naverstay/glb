@@ -51,15 +51,13 @@ export function turnGlobe(
 export const globeImg = (nightMode: boolean) => {
     const time = nightMode ? "night" : "day";
 
-    if (process.env.DAY_IMG && process.env.NIGHT_IMG) {
+    if (process.env.PUBLIC_URL) {
         if (time === 'day') {
-            return process.env.DAY_IMG || '';
+            return require('../data/dataUriDay.json').data;
         } else {
-            return process.env.NIGHT_IMG || '';
+            return require('../data/dataUriNight.json').data;
         }
-    }
-
-    if (isSafari && browserVersion < "14") {
+    } else if (isSafari && browserVersion < "14") {
         return process.env.PUBLIC_URL + `/images/safari-14-earth-${time}.jpg`;
     } else {
         return process.env.PUBLIC_URL + `/images/earth-${time}.webp`;

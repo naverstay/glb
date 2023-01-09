@@ -12,8 +12,8 @@ type Theme = {
     nightMode: boolean;
     highContrast: boolean;
     prideMode?: boolean;
-    milesMode?: boolean;
-    directionsMode?: boolean;
+    milesMode: boolean;
+    directionsMode: boolean;
 };
 
 type ThemeContextType = {
@@ -23,6 +23,7 @@ type ThemeContextType = {
 
 const initialTheme: Theme = {
     nightMode: false,
+    prideMode: false,
     highContrast: false,
     milesMode: false,
     directionsMode: true,

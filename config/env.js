@@ -63,11 +63,6 @@ const REACT_APP = /^REACT_APP_/i;
 function getClientEnvironment(publicUrl) {
   let DAY_IMG = '';
   let NIGHT_IMG = '';
-  // todo uncomment when build local version
-  //if (process.env.NODE_ENV === 'development' || process.env.PUBLIC_URL) {
-  //  DAY_IMG = require('./dataUriDay.json').data;
-  //  NIGHT_IMG = require('./dataUriNight.json').data;
-  //}
 
   const raw = Object.keys(process.env)
     .filter(key => REACT_APP.test(key))
