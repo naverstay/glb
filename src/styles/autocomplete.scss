@@ -29,10 +29,10 @@
 
   &-wrapper {
     background: var(--app-bg-color);
-    padding: 10px 0;
-    position: sticky;
-    bottom: 0;
-    z-index: 2;
+    //padding: 10px 0;
+    //position: sticky;
+    //bottom: 0;
+    //z-index: 2;
 
     &.__pinned {
       &::before {
