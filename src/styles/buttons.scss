@@ -3,6 +3,14 @@
   outline: 0;
   cursor: pointer;
 
+  &-home {
+    background: none;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
   &-blue {
     background: $btn-blue-bg;
     transition: background .3s, color .3s;

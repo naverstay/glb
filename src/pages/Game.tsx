@@ -2,7 +2,6 @@ import React, {lazy, Suspense, useEffect, useMemo, useRef, useState} from "react
 import {GlobeMethods} from "react-globe.gl";
 import {Country} from "../lib/country";
 import {answerCountry, answerName} from "../util/answer";
-import {setQueryStringParameter} from "../hooks/useLocalStorage";
 import {Guesses, Stats} from "../lib/localStorage";
 import {dateDiffInDays, today} from "../util/dates";
 import {polygonDirection, polygonDistance} from "../util/distance";
@@ -68,9 +67,6 @@ export default function Game({
     useEffect(() => {
         if (practiceMode) {
             enterPracticeMode();
-            setQueryStringParameter('practice_mode', "true");
-        } else {
-            setQueryStringParameter('practice_mode', "");
         }
 
         if (showLoader) setTimeout(() => {
@@ -212,14 +208,6 @@ export default function Game({
     return (
         <Suspense fallback={renderLoader()}>
             <div className="container">
-                <Guesser
-                    guesses={guesses}
-                    setGuesses={setGuesses}
-                    win={win}
-                    setWin={setWin}
-                    practiceMode={practiceMode}
-                />
-
                 {win && !practiceMode ? <Share storedGuesses={storedGuesses}
                                                storeGuesses={storeGuesses}
                                                firstStats={firstStats}
@@ -256,6 +244,14 @@ export default function Game({
                         }
                     </div>
                 )}
+
+                <Guesser
+                    guesses={guesses}
+                    setGuesses={setGuesses}
+                    win={win}
+                    setWin={setWin}
+                    practiceMode={practiceMode}
+                />
             </div>
         </Suspense>
     );

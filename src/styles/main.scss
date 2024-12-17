@@ -37,8 +37,26 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+#root {
+  min-height: 100%;
+  display: flex;
+}
+
 .page {
   padding: 0 10px;
+  flex: 1;
+
+  &.__home {
+    background: linear-gradient(to bottom,  #1840b5 0%,#1085d6 100%);
+    display: flex;
+    flex-flow: column;
+
+    .container {
+      display: flex;
+      flex-flow: column;
+      margin: auto;
+    }
+  }
 }
 
 .container {
@@ -58,10 +76,14 @@ body {
     margin-top: 10px;
   }
 
+  &-wrapper {
+    position: relative;
+  }
+
   &-controls {
     height: 0;
     position: absolute;
-    top: 0;
+    bottom: 0;
     right: 0;
     left: 0;
     display: flex;
@@ -102,4 +124,25 @@ body {
 
 .fw-b {
   font-weight: 700;
+}
+
+.home-cell {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5vw;
+  margin: auto;
+  max-width: 66vw;
+  min-height: 62vh;
+  padding-bottom: 2vw;
+}
+
+.home-logo {
+  max-width: 72%;
+  margin-bottom: min(30vw, 180px);
+
+  img {
+    max-width: 100%;
+  }
 }

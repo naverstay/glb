@@ -53,9 +53,9 @@ export const globeImg = (nightMode: boolean) => {
 
     if (process.env.PUBLIC_URL) {
         if (time === 'day') {
-            return require('../data/dataUriDay.json').data;
+            return require('./dataUriDay.json').data;
         } else {
-            return require('../data/dataUriNight.json').data;
+            return require('./dataUriNight.json').data;
         }
     } else if (isSafari && browserVersion < "14") {
         return process.env.PUBLIC_URL + `/images/safari-14-earth-${time}.jpg`;

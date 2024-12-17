@@ -29,9 +29,9 @@
 
   &-wrapper {
     background: var(--app-bg-color);
-    padding-top: 20px;
+    padding: 10px 0;
     position: sticky;
-    top: -10px;
+    bottom: 0;
     z-index: 2;
 
     &.__pinned {

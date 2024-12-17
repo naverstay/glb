@@ -232,6 +232,12 @@ export default function Guesser({
             {process.env.NODE_ENV === 'development' ? <p>
                 {answerName}
             </p> : null}
+            <Message
+                win={win}
+                error={error}
+                guesses={guesses.length}
+                practiceMode={practiceMode}
+            />
             <form className="autocomplete-form" onSubmit={addGuess}>
                 <div ref={guessHolderRef} className={"autocomplete-holder" + (win ? ' __disabled' : '')}>
                     <ReactSearchAutocomplete
@@ -290,12 +296,6 @@ export default function Guesser({
                     <FormattedMessage id="Game2"/>
                 </button>
             </form>
-            <Message
-                win={win}
-                error={error}
-                guesses={guesses.length}
-                practiceMode={practiceMode}
-            />
         </div>
     );
 }

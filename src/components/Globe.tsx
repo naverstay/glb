@@ -146,7 +146,7 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
     console.log('###RENDER### Globe');
 
     return (
-        <div>
+        <div className="globe-wrapper">
             <div
                 ref={containerRef}
                 className="globe"
@@ -188,3 +188,4 @@ export default function Globe({guesses, globeRef, practiceMode}: Props) {
         </div>
     );
 }
+

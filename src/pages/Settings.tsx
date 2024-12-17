@@ -58,13 +58,13 @@ export default function Settings({closeCallback, setMiles, miles, setDirections,
             on: "",
             off: "",
         },
-        {
-            name: localeList[locale]["Settings4"],
-            setToggle: setPracticeMode,
-            toggle: practiceMode,
-            on: "",
-            off: ""
-        },
+        // {
+        //     name: localeList[locale]["Settings4"],
+        //     setToggle: setPracticeMode,
+        //     toggle: practiceMode,
+        //     on: "",
+        //     off: ""
+        // },
         {
             name: localeList[locale]["Settings15"],
             setToggle: setDirections,
