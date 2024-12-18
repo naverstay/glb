@@ -28,11 +28,13 @@
   }
 
   &-wrapper {
-    background: var(--app-bg-color);
-    padding: 10px 0;
+    background: var(--search-bg-color);
+    padding: 10px 10px 15px;
     position: sticky;
     bottom: 0;
     z-index: 2;
+    margin-left:-10px;
+    width:calc(100% + 20px);
 
     &.__pinned {
       &::before {
@@ -72,6 +74,7 @@
 
       input {
         color: $text-main-color !important;
+        font-family: 'Montserrat', sans-serif;
       }
 
       li.selected {
@@ -88,6 +91,8 @@
       gap: 8px;
       grid-template-columns: 20px 1fr;
       align-items: center;
+      text-transform:capitalize;
+      color: $text-main-color;
 
       &__icon {
         display: flex;

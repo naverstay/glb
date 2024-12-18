@@ -78,6 +78,7 @@ body {
 
   &-message {
     padding: 0 50px;
+    font-size:14px;
   }
 
   &-wrapper {
@@ -95,9 +96,9 @@ body {
 
     .btn {
       border-radius: 4px;
-      width: 36px;
-      height: 36px;
-      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      font-size: 23px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -125,7 +126,9 @@ body {
 .text-gray-dark {
   color: $text-green-light-color;
 }
-
+result-item__text {
+  text-transform:capitalize;
+}
 .fw-b {
   font-weight: 700;
 }

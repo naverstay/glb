@@ -15,16 +15,15 @@
     background: $btn-blue-bg;
     transition: background .3s, color .3s;
     color: $btn-blue-text;
-
-    &:hover {
-      background: $btn-blue-hover;
-    }
+    border-bottom: $btn-blue-border;
+    box-shadow: 0 2px 6px 0 rgb(0 0 0 / 10%)
   }
 
   &-darkblue {
     background: $text-blue-color;
     transition: background .3s, color .3s;
     color: $text-white-color;
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 15%);
 
     &:hover {
       background: $btn-darkblue-hover;
