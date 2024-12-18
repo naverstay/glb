@@ -7,6 +7,7 @@ import {dateDiffInDays, today} from "../util/dates";
 import {polygonDirection, polygonDistance} from "../util/distance";
 import {getColourEmoji} from "../util/colour";
 import {FormattedMessage} from "../context/FormattedMessage";
+import {Message} from "../components/Message";
 import Share from "../components/Share";
 
 const Globe = lazy(() => import("../components/Globe"));
@@ -45,6 +46,7 @@ export default function Game({
                                  storedStats,
                                  storeStats
                              }: Props) {
+    const [error, setError] = useState("");
 
     function enterPracticeMode(force?: boolean) {
         if (!force && practiceStoredGuesses?.day === '' && practiceStoredGuesses?.countries?.length) {
@@ -222,6 +224,16 @@ export default function Game({
                             globeRef={globeRef}
                             practiceMode={practiceMode}
                         />
+
+                        <div className="globe-message">
+                            <Message
+                                win={win}
+                                error={error}
+                                guesses={guesses.length}
+                                practiceMode={practiceMode}
+                            />
+                        </div>
+
                         <List
                             answerName={answerName}
                             miles={miles}
@@ -246,6 +258,7 @@ export default function Game({
                 )}
 
                 <Guesser
+                    setError={setError}
                     guesses={guesses}
                     setGuesses={setGuesses}
                     win={win}

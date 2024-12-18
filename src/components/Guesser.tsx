@@ -31,6 +31,7 @@ type Props = {
     win: boolean;
     setWin: React.Dispatch<React.SetStateAction<boolean>>;
     practiceMode: boolean;
+    setError: (err: string) => void;
 };
 
 const getScrollTop = () => {
@@ -43,10 +44,10 @@ export default function Guesser({
                                     win,
                                     setWin,
                                     practiceMode,
+                                    setError,
                                 }: Props) {
     const [guessName, setGuessName] = useState("");
     const [guessFlag, setGuessFlag] = useState("");
-    const [error, setError] = useState("");
     const [autoCompleteIndex, setAutoCompleteIndex] = useState(1);
     const locale = 'en-CA';
     const langName = 'NAME_EN';
@@ -232,12 +233,7 @@ export default function Guesser({
             {process.env.NODE_ENV === 'development' ? <p>
                 {answerName}
             </p> : null}
-            <Message
-                win={win}
-                error={error}
-                guesses={guesses.length}
-                practiceMode={practiceMode}
-            />
+
             <form className="autocomplete-form" onSubmit={addGuess}>
                 <div ref={guessHolderRef} className={"autocomplete-holder" + (win ? ' __disabled' : '')}>
                     <ReactSearchAutocomplete

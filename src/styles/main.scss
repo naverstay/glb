@@ -76,6 +76,10 @@ body {
     margin-top: 10px;
   }
 
+  &-message {
+    padding: 0 50px;
+  }
+
   &-wrapper {
     position: relative;
   }
@@ -131,7 +135,7 @@ body {
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  gap: 5vw;
+  gap: min(5vw, 2vh);
   margin: auto;
   max-width: 66vw;
   min-height: 62vh;
@@ -140,7 +144,7 @@ body {
 
 .home-logo {
   max-width: 72%;
-  margin-bottom: min(30vw, 180px);
+  margin-bottom: min(min(30vw, 180px), 5vh);
 
   img {
     max-width: 100%;
