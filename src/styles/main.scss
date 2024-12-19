@@ -24,7 +24,6 @@
 }
 
 html {
-  height: 100%;
   overflow-y: scroll;
   overflow-x: clip;
   background: var(--app-bg-color);
@@ -32,13 +31,12 @@ html {
 
 body {
   overflow-x: clip;
-  height: 100%;
   color: var(--text-main-color);
   font-family: 'Montserrat', sans-serif;
 }
 
 #root {
-  min-height: 100%;
+  min-height: 100vh;
   display: flex;
 }
 
@@ -48,6 +46,7 @@ body {
 
   &.__home {
     background: linear-gradient(to bottom,  #1840b5 0%,#1085d6 100%);
+    height: 100vh;
     display: flex;
     flex-flow: column;
 
@@ -77,6 +76,7 @@ body {
   }
 
   &-message {
+    min-height: 50px;
     padding: 0 50px;
     font-size:14px;
   }
@@ -95,7 +95,7 @@ body {
     justify-content: space-between;
 
     .btn {
-      border-radius: 4px;
+      border-radius: 50px;
       width: 40px;
       height: 40px;
       font-size: 23px;

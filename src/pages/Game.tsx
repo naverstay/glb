@@ -223,6 +223,7 @@ export default function Game({
                             guesses={guesses}
                             globeRef={globeRef}
                             practiceMode={practiceMode}
+
                         />
 
                         <div className="globe-message">
@@ -233,6 +234,15 @@ export default function Game({
                                 practiceMode={practiceMode}
                             />
                         </div>
+
+                        <Guesser
+                            setError={setError}
+                            guesses={guesses}
+                            setGuesses={setGuesses}
+                            win={win}
+                            setWin={setWin}
+                            practiceMode={practiceMode}
+                        />
 
                         <List
                             answerName={answerName}
@@ -256,15 +266,6 @@ export default function Game({
                         }
                     </div>
                 )}
-
-                <Guesser
-                    setError={setError}
-                    guesses={guesses}
-                    setGuesses={setGuesses}
-                    win={win}
-                    setWin={setWin}
-                    practiceMode={practiceMode}
-                />
             </div>
         </Suspense>
     );

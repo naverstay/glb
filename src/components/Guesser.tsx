@@ -230,7 +230,7 @@ export default function Guesser({
     return (
         <div ref={aotocompleteRef} className="autocomplete-wrapper">
             <style>{css}</style>
-            {process.env.NODE_ENV === 'development' ? <p>
+            {process.env.NODE_ENV === 'development' ? <p style={{display: 'none'}}>
                 {answerName}
             </p> : null}
 

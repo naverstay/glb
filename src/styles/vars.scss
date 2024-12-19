@@ -1,7 +1,7 @@
 :root {
   --app-scroll-size: 6px;
   --app-width: 600px;
-  --app-bg-color: linear-gradient(180deg, rgb(176 223 255) 10%, rgb(231 243 255) 100%);
+  --app-bg-color: linear-gradient(180deg, #a0d8ff 10%, #e7f3ff);
   --search-bg-color: rgb(255 255 255 / 50%);
   --text-main-color: #061b29;
   --text-white-color: #fff;
@@ -10,7 +10,7 @@
   --text-red-color: #f00;
   --text-rose-color: #ab6976;
   --text-green-color: #00ab35;
-  --text-green-light-color: rgb(0 171 53 / 20%);
+  --text-green-light-color: rgb(0 171 53 / 35%);
   --text-blue-color: linear-gradient(180deg, #30a9f9 10%, #0b8fe6 100%);
   --text-blue-color-light: rgb(122 186 217 / 30%);
   --btn-blue-hover: #91d3ff;
@@ -26,7 +26,7 @@
   --btn-gray-border-light: #d5e0e7;
   --btn-gray-color: #536068;
   --autocomplete-bg: #fff;
-  --autocomplete-border: #dfe1e5;
+  --autocomplete-border: transparent;
   --autocomplete-hover-bg: #eef1f3;
   --autocomplete-result-text: #477eea;
 }
@@ -48,10 +48,10 @@ $btn-darkblue-hover: var(--btn-darkblue-hover);
 $btn-green-bg: var(--btn-green-bg);
 $btn-blue-text: var(--btn-blue-text);
 $btn-blue-bg: var(--btn-blue-bg);
+$btn-blue-border: var(--btn-blue-border);
 $btn-gray-bg-dark: var(--btn-gray-bg-dark);
 $btn-gray-bg: var(--btn-gray-bg);
 $btn-gray-bg-light: var(--btn-gray-bg-light);
-$btn-blue-border: var(--btn-blue-border);
 $btn-gray-border: var(--btn-gray-border);
 $btn-gray-border-light: var(--btn-gray-border-light);
 $btn-gray-color: var(--btn-gray-color);
@@ -62,6 +62,7 @@ $autocomplete-result-text: var(--autocomplete-result-text);
 
 .dark:root {
   --app-bg-color: linear-gradient(180deg, #09225a 10%, #030e26 100%);
+  --search-bg-color: rgb(4 14 34 / 70%);
   --text-main-color: #fff;
   --text-white-color: #fff;
   --text-white-color-dark: #355870;
@@ -73,19 +74,19 @@ $autocomplete-result-text: var(--autocomplete-result-text);
   --text-blue-color: linear-gradient(180deg, rgb(8 118 191) 10%, rgb(6 93 151) 100%);
   --text-blue-color-light: rgb(28 83 118 / 60%);
   --btn-blue-hover: linear-gradient(180deg, rgb(10 135 219) 10%, rgb(10 114 183) 100%);
-  --btn-darkblue-hover: #258ccf;
+  --btn-darkblue-hover: linear-gradient(180deg, #0a87db 10%, #0a72b7);
   --btn-green-bg: #0fbb50;
   --btn-blue-text: #f3f6f9;
   --btn-blue-bg: linear-gradient(180deg, rgb(83 115 137) 10%, rgb(57 84 102) 100%);
-  --btn-blue-border: 1px solid #60839b;
+  --btn-blue-border: 1px solid #506b7c;
   --btn-gray-bg-dark: #466d88;
   --btn-gray-bg: #0d334a;
   --btn-gray-bg-light: #244155;
   --btn-gray-border: #1e435c;
   --btn-gray-border-light: #3d5c72;
   --btn-gray-color: #536068;
-  --autocomplete-bg: #212c32;
-  --autocomplete-border: #485860;
+  --autocomplete-bg: #1c2e54;
+  --autocomplete-border: #3a4660;
   --autocomplete-hover-bg: #3b4865;
   --autocomplete-result-text: #fff;
 }
